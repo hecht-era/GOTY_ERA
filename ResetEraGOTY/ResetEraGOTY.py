@@ -3,7 +3,7 @@ import urllib.request
 from bs4 import BeautifulSoup
 
 # Define variables
-allVotes = [[] for i in range(1000)]
+allVotes = [[] for i in range(2000)]
 userTotal = []
 finalTally = [[] for i in range(500)]
 tempVote = [0] * 2
