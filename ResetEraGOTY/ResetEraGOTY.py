@@ -16,7 +16,7 @@ results = open("results.txt","w")
 
 # Request Webpage
 req = urllib.request.Request(
-    'https://www.resetera.com/threads/mafia-ot-make-friends-through-murders-sign-up-inside.18/', 
+    'http://23.91.70.28/~resetera/index.php?threads/the-resetera-goty-2017-voting-thread.63/', 
     data=None, 
     headers={
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'
@@ -33,9 +33,9 @@ pages = era_page.find("span", {"class" : "pageNavHeader"})
 nav = pages.contents[0].split(" ")
 numPages = int(nav[3])
 
-thread = "https://www.resetera.com/threads/mafia-ot-make-friends-through-murders-sign-up-inside.18/"
+thread = "http://23.91.70.28/~resetera/index.php?threads/the-resetera-goty-2017-voting-thread.63/"
 
-for p in range(24, 25):
+for p in range(1, numPages):
     thread2 = thread + "page-" + str(p)
     print(thread2)
     req = urllib.request.Request(thread2, data=None, 
