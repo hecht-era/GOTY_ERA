@@ -3,107 +3,21 @@ import urllib.request
 from bs4 import BeautifulSoup
 import sqlite3, csv
 
-length = 0
+#query methods
 
-# Define variables
-allVotes = [[] for i in range(2000)]
-userTotal = []
-finalTally = [[] for i in range(500)]
-tempVote = [0] * 2
-userVote = 0
-userNum = 0
-gameNum = 0
-voted = False
-doesExist = False
-results = open("results.txt","w")
-place = ["runnerup", "tenth", "ninth", "eighth", "seventh", "sixth", "fifth", "fourth", "third", "second", "first"]
-
-# Request Webpage
-req = urllib.request.Request(
-    'https://www.resetera.com/threads/mafia-ot-make-friends-through-murders-sign-up-inside.18/page-24', 
-    data=None, 
-    headers={
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'
-    }
-)
-f = urllib.request.urlopen(req)
-
-# Store page in variable
-era_page = BeautifulSoup(f, 'html.parser')
-f.close()
-
-# Find out how many pages there are
-pages = era_page.find("span", {"class" : "pageNavHeader"})
-nav = pages.contents[0].split(" ")
-numPages = int(nav[3])
-
-thread = "https://www.resetera.com/threads/mafia-ot-make-friends-through-murders-sign-up-inside.18/"
-
-for p in range(24, 25):
-    thread2 = thread + "page-" + str(p)
-    print(thread2)
-    req = urllib.request.Request(thread2, data=None, 
-        headers={
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'
-        }
-    )
-    f = urllib.request.urlopen(req)
-    # Collect posts/list items
-    era_page = BeautifulSoup(f, 'html.parser')
-    f.close()
-    posts = era_page.find_all("div", {"class" : "messageContent"})
-    for post in posts:
-        hasQuote = post.find("div")
-        if not hasQuote is None: # Skips quoted posts
-            hasQuote.extract()
-        post.append(post.get_text(strip=True))
-        lists = post.find_all("li")
-    # Store votes in userTotal, then put userTotal as a list item in allVotes
-        for list in lists:
-            bold = list.find("b")
-            if(bold is not None):
-                print(bold.contents[0])
-                userTotal.append(bold.contents[0])
-        for i in range(len(userTotal)):
-            allVotes[userNum].append(userTotal[i])
-        if(allVotes[userNum]!=[]):
-           userNum += 1
-        userTotal = []
-# end for loop
-
-# Tally the votes
-for i in range(0, userNum):
-    for j in range(len(allVotes[i])):
-        for x in range(len(finalTally)):
-            if allVotes[i][j] in finalTally[x]:
-                finalTally[x][1] += (10 - j)
-                doesExist = True #Game was found in the list already, will bypass the following
-        if not doesExist: # Adds game to list if not found already
-            tempVote[0] = allVotes[i][j]
-            tempVote[1] = (10-j)
-            finalTally[gameNum].append(tempVote[0])
-            finalTally[gameNum].append(tempVote[1])
-            gameNum += 1
-    doesExist = False
-
-
-list2 = [x for x in finalTally if x != []]
-
-def getKey(item):
-    return item[1]
-
-final = sorted(list2, key = getKey, reverse=True)
-
-for j in range(gameNum):
-    r = str(final[j][0])
-    results.write(r)
-    results.write(" - ")
-    s = str(final[j][1])
-    results.write(s)
-    results.write("\n")
-
-# End Vote Collection
-# Begin Tallying
+def getRank(num):
+    return {
+        0:"first",
+        1:"second",
+        2:"third",
+        3:"fourth",
+        4:"fifth",
+        5:"sixth",
+        6:"seventh",
+        7:"eighth",
+        8:"ninth",
+        9:"tenth",
+    }.get(num, "runnerup")
 
 def loadGamesList():
     global length
@@ -111,7 +25,7 @@ def loadGamesList():
     con.text_factory = str
     c = con.cursor()
     c.executescript("""DROP TABLE IF EXISTS gameslist; CREATE TABLE gameslist (num INTEGER, title TEXT, platform TEXT, publisher TEXT, genre TEXT, points INTEGER, first INTEGER, second INTEGER, third INTEGER, fourth INTEGER, fifth INTEGER, sixth INTEGER, seventh INTEGER, eighth INTEGER, ninth INTEGER, tenth INTEGER, runnerup INTEGER, PRIMARY KEY (num));""")
-    with open('gameslist.csv', 'rb') as f:
+    with open('gameslist.csv', 'r') as f:
         dr = csv.DictReader(f)
         to_db = [(i['Game Number'], i['Title'], i['Platform'], i['Publisher'], 
                 i['Genre'], i['Points'], i['First'], i['Second'], i['Third'], 
@@ -161,6 +75,7 @@ def updatePoints(title, points, rank):
     con.close()
 
 def getGOTY():
+    print("Top 20 Games of 2017\n")
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
@@ -172,6 +87,7 @@ def getGOTY():
     con.close()
 
 def getFullList():
+    print("Full Results\n")
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
@@ -183,6 +99,7 @@ def getFullList():
     con.close()
 
 def getBestPCGame():
+    print("Best PC Games\n")
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
@@ -194,6 +111,7 @@ def getBestPCGame():
     con.close()
 
 def getBestPS4Game():
+    print("Best PS4 Games\n")
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
@@ -205,6 +123,7 @@ def getBestPS4Game():
     con.close()
 
 def getBestXBOGame():
+    print("Best Xbox One Games\n")
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
@@ -216,6 +135,7 @@ def getBestXBOGame():
     con.close()
 
 def getBestNSWGame():
+    print("Best Nintendo Switch Games\n")
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
@@ -227,6 +147,7 @@ def getBestNSWGame():
     con.close()
 
 def getBest3DSGame():
+    print("Best 3DS Games\n")
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
@@ -238,6 +159,7 @@ def getBest3DSGame():
     con.close()
 
 def getBestVITAGame():
+    print("Best Vita Games\n")
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
@@ -249,6 +171,7 @@ def getBestVITAGame():
     con.close()
 
 def getBestMobileGame():
+    print("Best Mobile Games\n")
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
@@ -260,6 +183,7 @@ def getBestMobileGame():
     con.close()
 
 def getBestActionGame():
+    print("Best Action Games\n")
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
@@ -271,6 +195,7 @@ def getBestActionGame():
     con.close()
 
 def getBestActionAdventureGame():
+    print("Best Action-Adventure Games\n")
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
@@ -282,6 +207,7 @@ def getBestActionAdventureGame():
     con.close()
 
 def getBestAdventureGame():
+    print("Best Adventure Games\n")
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
@@ -293,6 +219,7 @@ def getBestAdventureGame():
     con.close()
 
 def getBestRPGGame():
+    print("Best RPG Games\n")
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
@@ -304,6 +231,7 @@ def getBestRPGGame():
     con.close()
 
 def getBestShooterGame():
+    print("Best Shooter Games\n")
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
@@ -315,6 +243,7 @@ def getBestShooterGame():
     con.close()
 
 def getBestRacingGame():
+    print("Best Racing Games\n")
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
@@ -326,6 +255,7 @@ def getBestRacingGame():
     con.close()
 
 def getBestSportsGame():
+    print("Best Sports Games\n")
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
@@ -337,6 +267,8 @@ def getBestSportsGame():
     con.close()
 
 def getBestStrategyGame():
+    print("Best Strategy Games\n")
+    print(Bes)
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
@@ -348,6 +280,7 @@ def getBestStrategyGame():
     con.close()
 
 def getBestFightingGame():
+    print("Best Fighting Games\n")
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
@@ -359,6 +292,7 @@ def getBestFightingGame():
     con.close()
 
 def getBestPuzzleGame():
+    print("Best Puzzle Games\n")
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
@@ -369,7 +303,20 @@ def getBestPuzzleGame():
     c.close()
     con.close()
 
+def getBestBoardAndCardGame():
+    print("Best Puzzle Games\n")
+    con = sqlite3.connect("goty.db")
+    c = con.cursor()
+
+    c.execute("SELECT title, points FROM gameslist WHERE genre LIKE '%Board+Card%' ORDER BY points DESC LIMIT 10;")
+    print(c.fetchall())
+
+    con.commit()
+    c.close()
+    con.close()
+
 def getBestVRGame():
+    print("Best VR Games\n")
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
@@ -381,6 +328,7 @@ def getBestVRGame():
     con.close()
 
 def getBestRemakeGame():
+    print("Best Remakes")
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
@@ -392,6 +340,7 @@ def getBestRemakeGame():
     con.close()
 
 def getFanFavorite():
+    print("Most Popular Games (Based on most #1 votes)\n")
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
@@ -507,18 +456,138 @@ def testGetNSWGame():
     updatePoints('Star Wars Battlefront II', 0, 'runnerup')
     getBestNSWGame();
 
+class HashTable:
+    size = 16
+    num = 0
+    table = [None] * size
+
+    def __init__(self, s):
+        self.size = s
+        self.table = [None] * self.size
+
+    def insert(self, value):
+        if self.num >= self.size / 2:
+            rebuildTable()
+
+        place = 0
+        for i in range(0, len(value)):
+            print(value[i])
+            place = place + ord(value[i])
+
+        place = place % self.size
+        
+        while self.table[place] is not None:
+            place = place + 1
+            if(place >= self.size):
+                place = 0
+        self.table[place] = value
+
+    def rebuildTable(self):
+        self.size = self.size * 2
+        newTable = [None] * self.size
+        for item in self.table:
+            if item is not None:
+                place = 0
+                for i in range(0, len(value)):
+                    place = place + ord(value[i])
+                place = place % self.size
+
+                while newTable[place] is not None:
+                    place = place + 1
+                    if(place >= self.size):
+                        place = 0
+                newTable[place] = item
+        self.table = newTable
+
+    def find(self, value):
+        place = 0
+        for i in range(0, len(value)):
+            place = place + ord(value[i])
+
+        place = place % self.size
+        while self.table[place] is not None:
+            if self.table[place] == value:
+                return True
+            place = place + 1
+            if(place >= self.size):
+                place = 0
+        return False
+
+
+
+#voting calculations
+length = 0
+loadGamesList()
+
+voters = HashTable(20)
+results = open("results.txt","w")
+
+# Request Webpage
+req = urllib.request.Request(
+    'https://www.resetera.com/threads/mafia-ot-make-friends-through-murders-sign-up-inside.18/page-24', 
+    data=None, 
+    headers={
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'
+    }
+)
+f = urllib.request.urlopen(req)
+
+# Store page in variable
+era_page = BeautifulSoup(f, 'html.parser')
+f.close()
+
+# Find out how many pages there are
+pages = era_page.find("span", {"class" : "pageNavHeader"})
+nav = pages.contents[0].split(" ")
+numPages = int(nav[3])
+
+thread = "https://www.resetera.com/threads/mafia-ot-make-friends-through-murders-sign-up-inside.18/"
+
+for p in range(24, 25):
+    thread2 = thread + "page-" + str(p)
+    print(thread2)
+    req = urllib.request.Request(thread2, data=None, 
+        headers={
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'
+        }
+    )
+    f = urllib.request.urlopen(req)
+    # Collect posts/list items
+    era_page = BeautifulSoup(f, 'html.parser')
+    f.close()
+    users = era_page.find_all("a", {"class" : "username"})
+    posts = era_page.find_all("div", {"class" : "messageContent"})
+    for i in range(0, 50):
+        if not voters.find(users[i].get_text(strip=True)):
+            hasQuote = posts[i].find("div")
+            if not hasQuote is None: # Skips quoted posts
+                hasQuote.extract()
+            posts[i].append(posts[i].get_text(strip=True))
+            lists = posts[i].find_all("li")
+            # Gets the list and then calculates the votes using the query
+            list_rank = 0
+            for list in lists:
+                bold = list.find("b")
+                if(bold is not None):
+                    updatePoints(bold.contents[0], 0 if list_rank > 10 else 10 - list_rank, getRank(list_rank))
+                list_rank = list_rank + 1
+            if list_rank > 0:
+                voters.insert(users[i].get_text(strip=True))
+                
+# end for loop
+
+getGOTY()
+
+def getKey(item):
+    return item[1]
+
+# End Vote Collection
+# Begin Tallying
+
 #testUpdatePoints()
 #testUpdatePointsWithRemakeVote()
 #testUpdatePointsWithNewGames()
-testGetPCGame()
-testGetPS4Game()
-testGetXBOGame()
-testGetNSWGame()
-
-for x in range(len(final)):
-    title = final[x][0]
-    points = final[x][1]
-    rank = place[points]
-    if (place[points]<=0):
-        rank = place[0]
-    updatePoints(title, points, rank)
+#testGetPCGame()
+#testGetPS4Game()
+#testGetXBOGame()
+#testGetNSWGame()
