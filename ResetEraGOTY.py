@@ -497,22 +497,39 @@ def getBestPublisher():
     c.close()
     con.close()
 
+def getBestConsole():
+    print("Best Publisher\n")
+    con = sqlite3.connect("goty.db")
+    c = con.cursor()
+
+    c.execute("SELECT publisher, sum(points) FROM gameslist GROUP BY publisher ORDER BY sum(points) DESC;")
+    winners = c.fetchall();
+
+    count = 1;
+    for winner in winners:
+        print('%i. %s, %i votes' % (count, winner[0], winner[1]));
+        count = count + 1;
+
+    con.commit()
+    c.close()
+    con.close()
+
 def checkVote(vote):
     if vote.find("zelda") != -1 or vote.find("botw") != -1 or vote.find("breath of the wild") != -1:
         return "the legend of zelda breath of the wild"
-    elif vote.find("resident evil") != -1:
+    elif (vote.find("resident evil") != -1 and (vote.find("vii") != -1 or vote.find("7") != -1)) or vote.find("biohazard") != -1:
         return "resident evil vii biohazard"
     elif vote.find("wolfenstein") != -1:
         return "wolfenstein ii the new colossus"
-    elif vote.find("mario odyssey") != -1:
+    elif vote.find("mario odyssey") != -1 or (vote.find("super mario") != -1 and vote.find("run") == -1):
         return "super mario odyssey"
-    elif vote.find("assassins creed") != -1:
+    elif vote.find("assassins creed") != -1 or vote.find("origins") != -1:
         return "assassins creed origins"
     elif vote.find("playerunknown") != -1 or vote.find("pubg") != -1 or vote.find("battleground") != -1:
         return "playerunknowns battlegrounds"
     elif vote.find("nier") != -1:
         return "nier automata"
-    elif vote.find("horizon zero") != -1:
+    elif vote.find("horizon zero") != -1 or (vote.find("horizon") != -1 and vote.find("forza") == -1):
         return "horizon zero dawn"
     elif vote.find("persona") != -1:
         return "persona 5"
@@ -538,7 +555,7 @@ def checkVote(vote):
         return "danganronpa v3 killing harmony"
     elif vote.find("xenoblade") != -1:
         return "xenoblade chronicles 2"
-    elif vote.find("pokemon ultra") != -1:
+    elif vote.find("pokemon ultra") != -1 or vote.find("pokémon") != -1:
         return "pokemon ultra sun ultra moon"
     elif vote.find("snipperclips") != -1:
         return "snipperclips cut it out together"  
@@ -546,10 +563,68 @@ def checkVote(vote):
         return "forza motorsport 7"  
     elif vote.find("etrian") != -1:
         return "etrian odyssey v beyond the myth"  
-    elif vote.find("xcom") != -1:
+    elif vote.find("xcom") != -1 or vote.find("x com") != -1:
         return "xcom 2 war of the chosen"
     elif vote.find("friday") != -1:
         return "friday the 13th the game"  
+    elif vote.find("crash") != -1:
+        return "crash bandicoot n sane trilogy"
+    elif vote.find("skyrim") != -1 and vote.find("vr") != -1:
+        return "the elder scrolls v skyrim vr"
+    elif vote.find("skyrim") != -1:
+        return "the elder scrolls v skyrim"
+    elif vote.find("steam") != -1 and vote.find("world") != -1:
+        return "steamworld dig 2"    
+    elif vote.find("knack") != -1:
+        return "knack ii"    
+    elif vote.find("evil within") != -1:
+        return "the evil within 2"  
+    elif vote.find("15 + 25") != -1:
+        return "kingdom hearts hd 15 + 25 remix"  
+    elif vote.find("fire emblem echoes") != -1 or vote.find("valentia") != -1:
+        return "fire emblem echoes shadows of valentia"  
+    elif vote.find("total war") != -1:
+        return "total war warhammer ii"  
+    elif vote.find("binding") != -1:
+        return "the binding of isaac afterbirth+"
+    elif vote.find("madden") != -1:
+        return "madden nfl 18"
+    elif vote.find("yakuza zero") != -1 or vote.find("yakuza 0") != -1:
+        return "yakuza 0" 
+    elif vote.find("battlefront") != -1:
+        return "star wars battlefront ii" 
+    elif vote.find("fifa") != -1:
+        return "fifa 18" 
+    elif vote.find("puyo") != -1:
+        return "puyo puyo tetris"
+    elif vote.find("night in the woods") != -1:
+        return "night in the woods"
+    elif vote.find("ghost recon") != -1:
+        return "tom clancys ghost recon wildlands"
+    elif vote.find("finding paradise") != -1:
+        return "finding paradise"
+    elif vote.find("ys vii") != -1:
+        return "ys viii lacrimosa of dana"
+    elif vote.find("final fantasy xiv") != -1 or vote.find("final fantasy 14") != -1 or vote.find("ffxiv") != -1:
+        return "final fantasy xiv stormblood"
+    elif vote.find("path of exile") != -1:
+        return "path of exile the fall of oriath"
+    elif vote.find("trails in the sky") != -1:
+        return "the legend of heroes trails in the sky the 3rd"
+    elif vote.find("tales") != -1:
+        return "tales of berseria"
+    elif vote.find("cup") != -1:
+        return "cuphead"
+    elif vote.find("magikarp") != -1:
+        return "pokemon magikarp jump"
+    elif vote.find("wonder") != -1:
+        return "wonder boy the dragons trap"
+    elif vote.find("hearthstone") != -1:
+        return "hearthstone expansions"
+    elif vote.find("28") != -1:
+        return "kingdom hearts hd 28 final chapter"
+    elif vote.find("dragon quest heroes") != -1:
+        return "dragon quest heroes ii"
 
     return vote
 
@@ -645,6 +720,7 @@ f.close()
 pages = era_page.find("span", {"class" : "pageNavHeader"})
 nav = pages.contents[0].split(" ")
 numPages = int(nav[3])
+voterCount = 0;
 
 thread = "https://www.resetera.com/threads/resetera-games-of-the-year-2017-voting-thread-read-the-op-ends-jan-21st-8-59am-est.11841/"
 print(numPages)
@@ -677,8 +753,8 @@ for p in range(1, numPages + 1):
                     list = list.find("b")
                 bold = list;
                 if(bold is not None):
-                    bold.contents[0] = bold.contents[0].string.rstrip(' -:<>b\\(.;,')
-                    bold.contents[0] = bold.contents[0].lstrip(' <>b')
+                    bold.contents[0] = bold.contents[0].string.rstrip(' -:<>\\(.;,')
+                    bold.contents[0] = bold.contents[0].lstrip(' <>')
                     bold.contents[0] = bold.contents[0].replace("'", "")
                     bold.contents[0] = bold.contents[0].replace(":", "")
                     bold.contents[0] = bold.contents[0].replace(" - ", " ")
@@ -709,6 +785,7 @@ for p in range(1, numPages + 1):
                 list_rank = list_rank + 1;
             if list_rank > 0:
                     voters.insert(users[i].get_text(strip=True))
+                    voterCount = voterCount + 1
         
 # end for loop
 
@@ -801,6 +878,7 @@ getFanFavorite()
 print("")
 getBestPublisher()
 print("")
+print("Total Voters: %i" % (voterCount))
 getFullList()
 
 

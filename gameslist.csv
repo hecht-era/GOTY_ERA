@@ -1,7 +1,7 @@
 Game Number,Title,Platform,Publisher,Genre,Points,First,Second,Third,Fourth,Fifth,Sixth,Seventh,Eighth,Ninth,Tenth,Runner Up
 1,1 2 switch,nsw,nintendo,party,0,0,0,0,0,0,0,0,0,0,0,0
 2,20xx,pc ps4,batterystaple games,action,0,0,0,0,0,0,0,0,0,0,0,0
-3,a hat in time,pc ps4 xbo,gears for breakfast,action,0,0,0,0,0,0,0,0,0,0,0,0
+3,a hat in time,pc ps4 xbo,gears for breakfast,action adventure,0,0,0,0,0,0,0,0,0,0,0,0
 4,a normal lost phone,ios and pc,plug in digital,adventure,0,0,0,0,0,0,0,0,0,0,0,0
 5,a rose in the twilight,pc vita,nippon ichi,adventure,0,0,0,0,0,0,0,0,0,0,0,0
 6,aaero,pc ps4 xbo,mad fellows,rhythm,0,0,0,0,0,0,0,0,0,0,0,0
@@ -43,7 +43,7 @@ Game Number,Title,Platform,Publisher,Genre,Points,First,Second,Third,Fourth,Fift
 42,cats crash arena turbo stars,ios and,zeptolab,fighting,0,0,0,0,0,0,0,0,0,0,0,0
 43,causality,ios pc,loju,puzzle,0,0,0,0,0,0,0,0,0,0,0,0
 44,cave story +,pc nsw,nicalis,action remake,0,0,0,0,0,0,0,0,0,0,0,0
-45,chaos child,ps4 vita,pqube,adventure,0,0,0,0,0,0,0,0,0,0,0,0
+45,chaoschild,ps4 vita,pqube,adventure,0,0,0,0,0,0,0,0,0,0,0,0
 46,children of zodiarcs,pc ps4,square enix,rpg,0,0,0,0,0,0,0,0,0,0,0,0
 47,city shrouded in shadow,ps4,bandai namco,action adventure,0,0,0,0,0,0,0,0,0,0,0,0
 48,cosmic star heroine,pc ps4,zeboyd games,rpg,0,0,0,0,0,0,0,0,0,0,0,0
@@ -139,9 +139,9 @@ Game Number,Title,Platform,Publisher,Genre,Points,First,Second,Third,Fourth,Fift
 138,halo wars 2,pc xbo,microsoft,strategy,0,0,0,0,0,0,0,0,0,0,0,0
 139,hand of fate 2,pc ps4 xbo,defiant development,board+card,0,0,0,0,0,0,0,0,0,0,0,0
 140,hatsune miku project diva future tone,ps4,sega,rhythm,0,0,0,0,0,0,0,0,0,0,0,0
-141,hearthstone journey to ungoro,pc ios and,activision blizzard,board+card,0,0,0,0,0,0,0,0,0,0,0,0
+141,hearthstone expansions,pc ios and,activision blizzard,board+card,0,0,0,0,0,0,0,0,0,0,0,0
 142,heat signature,pc,suspicious developments,action,0,0,0,0,0,0,0,0,0,0,0,0
-143,hellblade senuas sacrifice,pc ps4,ninja theory,action,0,0,0,0,0,0,0,0,0,0,0,0
+143,hellblade senuas sacrifice,pc ps4,ninja theory,action adventure,0,0,0,0,0,0,0,0,0,0,0,0
 144,hello neighbor,pc xbo,tinybuild,horror,0,0,0,0,0,0,0,0,0,0,0,0
 145,herald an interactive period drama,pc,wispfire,adventure,0,0,0,0,0,0,0,0,0,0,0,0
 146,hey pikmin,3ds,nintendo,action,0,0,0,0,0,0,0,0,0,0,0,0
@@ -188,7 +188,7 @@ Game Number,Title,Platform,Publisher,Genre,Points,First,Second,Third,Fourth,Fift
 187,mass effect andromeda,pc ps4 xbo,ea,rpg,0,0,0,0,0,0,0,0,0,0,0,0
 188,master x master,pc,ncsoft,action,0,0,0,0,0,0,0,0,0,0,0,0
 189,megaton rainfall,pc ps4,pentadimensional games,vr action,0,0,0,0,0,0,0,0,0,0,0,0
-190,metroid samus returns,3ds,nintendo,action remake,0,0,0,0,0,0,0,0,0,0,0,0
+190,metroid samus returns,3ds,nintendo,action adventure remake,0,0,0,0,0,0,0,0,0,0,0,0
 191,middle earth shadow of war,pc ps4 xbo,wb,action adventure,0,0,0,0,0,0,0,0,0,0,0,0
 192,mighty gunvolt burst,nsw 3ds,inti creates,action,0,0,0,0,0,0,0,0,0,0,0,0
 193,miitopia,3ds,nintendo,rpg,0,0,0,0,0,0,0,0,0,0,0,0
@@ -217,7 +217,7 @@ Game Number,Title,Platform,Publisher,Genre,Points,First,Second,Third,Fourth,Fift
 216,nhl 18,ps4 xbo,ea,sports,0,0,0,0,0,0,0,0,0,0,0,0
 217,nidhogg 2,pc ps4,messhof,fighting,0,0,0,0,0,0,0,0,0,0,0,0
 218,nier automata,pc ps4,square enix,rpg,0,0,0,0,0,0,0,0,0,0,0,0
-219,night in the woods,pc ps4 xbo,finji,action adventure,0,0,0,0,0,0,0,0,0,0,0,0
+219,night in the woods,pc ps4 xbo,finji,adventure,0,0,0,0,0,0,0,0,0,0,0,0
 220,nights of azure 2 bride of the new moon,pc ps4 nsw vita,koei tecmo,action,0,0,0,0,0,0,0,0,0,0,0,0
 221,nioh,pc ps4,koei tecmo,action,0,0,0,0,0,0,0,0,0,0,0,0
 222,observer,pc ps4 xbo,aspyr,horror,0,0,0,0,0,0,0,0,0,0,0,0
@@ -274,13 +274,13 @@ Game Number,Title,Platform,Publisher,Genre,Points,First,Second,Third,Fourth,Fift
 273,shadows of adam,pc,something classic games,rpg,0,0,0,0,0,0,0,0,0,0,0,0
 274,shantae half genie hero,nsw,wayforward,action adventure,0,0,0,0,0,0,0,0,0,0,0,0
 275,she remembered caterpillars,pc,ysbryd games,adventure,0,0,0,0,0,0,0,0,0,0,0,0
-276,shovel knight specter of torment,pc ps4 xbo nsw,yacht club games,action,0,0,0,0,0,0,0,0,0,0,0,0
+276,shovel knight specter of torment,pc ps4 ps3 vita xbo nsw wiiu 3ds,yacht club games,action,0,0,0,0,0,0,0,0,0,0,0,0
 277,shovel knight treasure trove,nsw,yacht club games,action remake,0,0,0,0,0,0,0,0,0,0,0,0
 278,simulacra,ios and pc,kaigan games,horror,0,0,0,0,0,0,0,0,0,0,0,0
 279,slayaway camp,ios and,blue wizard digial lp,horror remake,0,0,0,0,0,0,0,0,0,0,0,0
 280,slime rancher,pc xbo,monomi park,simulation,0,0,0,0,0,0,0,0,0,0,0,0
 281,slime san,pc nsw,headup games,action,0,0,0,0,0,0,0,0,0,0,0,0
-282,snake pass,pc ps4 xbo nsw,sumo digital,action,0,0,0,0,0,0,0,0,0,0,0,0
+282,snake pass,pc ps4 xbo nsw,sumo digital,action adventure,0,0,0,0,0,0,0,0,0,0,0,0
 283,sniper elite 4,pc ps4 xbo,rebellion,shooter,0,0,0,0,0,0,0,0,0,0,0,0
 284,snipperclips cut it out together,nsw,nintendo,puzzle,0,0,0,0,0,0,0,0,0,0,0,0
 285,soda dungeon,pc,armor games,rpg,0,0,0,0,0,0,0,0,0,0,0,0
@@ -331,7 +331,7 @@ Game Number,Title,Platform,Publisher,Genre,Points,First,Second,Third,Fourth,Fift
 330,tales of berseria,pc ps4,bandai namco,rpg,0,0,0,0,0,0,0,0,0,0,0,0
 331,tekken 7,pc ps4 xbo,bandai namco,fighting,0,0,0,0,0,0,0,0,0,0,0,0
 332,the big journey,ios and,armor games,adventure,0,0,0,0,0,0,0,0,0,0,0,0
-333,the binding of issac afterbirth+,pc ps4 nsw,nicalis,action remake,0,0,0,0,0,0,0,0,0,0,0,0
+333,the binding of isaac afterbirth+,pc ps4 nsw,nicalis,action remake,0,0,0,0,0,0,0,0,0,0,0,0
 334,the darkside detective,pc,spooky doorway,adventure,0,0,0,0,0,0,0,0,0,0,0,0
 335,the disney afternoon collection,pc ps4 xbo,capcom,action remake,0,0,0,0,0,0,0,0,0,0,0,0
 336,the elder scrolls legends,pc ios,bethesda,board+card,0,0,0,0,0,0,0,0,0,0,0,0
@@ -393,7 +393,7 @@ Game Number,Title,Platform,Publisher,Genre,Points,First,Second,Third,Fourth,Fift
 392,yankais peak,ios and pc,kenny & sun,puzzle,0,0,0,0,0,0,0,0,0,0,0,0
 393,yomawari midnight shadows,pc ps4 vita,nippon ichi,adventure,0,0,0,0,0,0,0,0,0,0,0,0
 394,yono and the celestial elephants,pc nsw,plug in digital,action,0,0,0,0,0,0,0,0,0,0,0,0
-395,yooka laylee,pc ps4 xbo nsw,team17,action,0,0,0,0,0,0,0,0,0,0,0,0
+395,yooka laylee,pc ps4 xbo nsw,team17,action adventure,0,0,0,0,0,0,0,0,0,0,0,0
 396,ys seven,pc,nihon falcom,rpg remake,0,0,0,0,0,0,0,0,0,0,0,0
 397,ys viii lacrimosa of dana,ps4 vita,nihon falcom,rpg,0,0,0,0,0,0,0,0,0,0,0,0
 398,yu gi oh duel links,ios and,konami,board+card,0,0,0,0,0,0,0,0,0,0,0,0
@@ -401,3 +401,25 @@ Game Number,Title,Platform,Publisher,Genre,Points,First,Second,Third,Fourth,Fift
 400,dark souls iii the ringed city,pc ps4 xbo,bandai namco,action,0,0,0,0,0,0,0,0,0,0,0,0
 401,okami hd,pc ps4 xbo,capcom,rpg,0,0,0,0,0,0,0,0,0,0,0,0
 402,friday the 13th the game,pc ps4 xbo,gun media,horror,0,0,0,0,0,0,0,0,0,0,0,0
+403,utawarerumono mask of deception,ps4 psv,atlus,rpg,0,0,0,0,0,0,0,0,0,0,0,0
+404,bayonetta,pc,sega,action remake,0,0,0,0,0,0,0,0,0,0,0,0
+405,vanquish,pc,sega,action remake,0,0,0,0,0,0,0,0,0,0,0,0
+406,need for speed payback,pc ps4 xbo,ea,racing,0,0,0,0,0,0,0,0,0,0,0,0
+407,rain world,pc ps4,videocraft,action adventure,0,0,0,0,0,0,0,0,0,0,0,0
+408,fortnite,nq,nq,nq,0,0,0,0,0,0,0,0,0,0,0,0
+409,fortnite battle royale,nq,nq,nq,0,0,0,0,0,0,0,0,0,0,0,0
+410,the last guardian,nq,nq,nq,0,0,0,0,0,0,0,0,0,0,0,0
+411,out of the park baseball 18,pc,out of the park developments,sports simulation,0,0,0,0,0,0,0,0,0,0,0,0
+412,the legend of heroes trails of cold steel,pc ps4 vita,nihon falcom,rpg,0,0,0,0,0,0,0,0,0,0,0,0
+413,eiyuu densetsu sen no kiseki iii,ps4,nihon falcom,rpg,0,0,0,0,0,0,0,0,0,0,0,0
+414,culdcept revolt,3ds,nis america,strategy,0,0,0,0,0,0,0,0,0,0,0,0
+415,the invisible hours,pc ps4,game trust,vr adventure,0,0,0,0,0,0,0,0,0,0,0,0
+416,tooth and tail,pc ps4,pocketwatch games,strategy,0,0,0,0,0,0,0,0,0,0,0,0
+417,thumper,xbo nsw,drool,rhythm,0,0,0,0,0,0,0,0,0,0,0,0
+418,warriors all stars,pc ps4 vita,action,0,0,0,0,0,0,0,0,0,0,0,0
+419,battle garegga rev 2016,ps4 xbo,eighting,0,0,0,0,0,0,0,0,0,0,0,0
+420,fidel dungeon rescue,pc,ludomancy,puzzle,0,0,0,0,0,0,0,0,0,0,0,0
+421,rabi ribi,ps4 vita,pqube,action,0,0,0,0,0,0,0,0,0,0,0,0
+422,voez,nsw,rayark,rhythm,0,0,0,0,0,0,0,0,0,0,0,0
+423,dragon quest heroes ii,pc ps4 vita nsw,square enix,rpg,0,0,0,0,0,0,0,0,0,0,0,0
+424,zwei the ilvard insurrection,pc,nihon falcom,rpg,0,0,0,0,0,0,0,0,0,0,0,0
