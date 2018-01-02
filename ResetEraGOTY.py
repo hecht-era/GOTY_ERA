@@ -22,18 +22,18 @@ def loadGamesList():
     con = sqlite3.connect("goty.db")
     con.text_factory = str
     c = con.cursor()
-    c.executescript("""DROP TABLE IF EXISTS gameslist; CREATE TABLE gameslist (num INTEGER, title TEXT, platform TEXT, publisher TEXT, genre TEXT, points INTEGER, first INTEGER, second INTEGER, third INTEGER, fourth INTEGER, fifth INTEGER, sixth INTEGER, seventh INTEGER, eighth INTEGER, ninth INTEGER, tenth INTEGER, runnerup INTEGER, PRIMARY KEY (num));""")
+    c.executescript("""DROP TABLE IF EXISTS gameslist; CREATE TABLE gameslist (title TEXT, platform TEXT, publisher TEXT, genre TEXT, points INTEGER, first INTEGER, second INTEGER, third INTEGER, fourth INTEGER, fifth INTEGER, sixth INTEGER, seventh INTEGER, eighth INTEGER, ninth INTEGER, tenth INTEGER, runnerup INTEGER);""")
     with open('gameslist.csv', 'r') as f:
         dr = csv.DictReader(f)
-        to_db = [(i['Game Number'], i['Title'], i['Platform'], i['Publisher'], 
+        to_db = [(i['Title'], i['Platform'], i['Publisher'], 
                 i['Genre'], i['Points'], i['First'], i['Second'], i['Third'], 
                 i['Fourth'], i['Fifth'], i['Sixth'], i['Seventh'], i['Eighth'], 
                 i['Ninth'], i['Tenth'], i['Runner Up']) for i in dr]
         length = len(to_db)
 
-    c.executemany("INSERT INTO gameslist (num, title, platform, publisher, genre, points, first, "
+    c.executemany("INSERT INTO gameslist (title, platform, publisher, genre, points, first, "
         + "second, third, fourth, fifth, sixth, seventh, eighth, ninth, tenth, runnerup) VALUES "
-        + "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", to_db)
+        + "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", to_db)
     con.commit()
     c.close()
     con.close()
@@ -51,7 +51,7 @@ def updatePoints(title, points, rank):
 
     if row is None:
         length = length + 1
-        query3 = "INSERT INTO gameslist (num, title, platform, publisher, genre, points, first, second, third, fourth, fifth, sixth, seventh, eighth, ninth, tenth, runnerup) VALUES (%i, '%s', 'pc', 'other', 'action', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);" % (length, title)
+        query3 = "INSERT INTO gameslist (title, platform, publisher, genre, points, first, second, third, fourth, fifth, sixth, seventh, eighth, ninth, tenth, runnerup) VALUES ('%s', 'pc', 'other', 'action', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);" % (title)
         c.execute(query3)
         c.execute(query1)
         row = c.fetchone()
@@ -100,6 +100,7 @@ def getFullList():
     csvWriter = csv.writer(open("results.csv", "w"))
     with open('results.csv','w') as f:
         writer = csv.writer(f, delimiter =',')
+        writer.writerow(['Title', 'Platforms', 'Publisher', 'Genre', 'Points', 'First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh', 'Eighth', 'Ninth', 'Tenth', 'Runner-up'])
         writer.writerows(winners)
 
     con.commit()
@@ -519,13 +520,13 @@ def checkVote(vote):
         return "the legend of zelda breath of the wild"
     elif (vote.find("resident evil") != -1 and (vote.find("vii") != -1 or vote.find("7") != -1)) or vote.find("biohazard") != -1:
         return "resident evil vii biohazard"
-    elif vote.find("wolfenstein") != -1:
+    elif vote.find("wolfenstein") != -1 or vote.find("wolfenstein") != -1 or vote.find("colossus") != -1:
         return "wolfenstein ii the new colossus"
     elif vote.find("mario odyssey") != -1 or (vote.find("super mario") != -1 and vote.find("run") == -1):
         return "super mario odyssey"
     elif vote.find("assassins creed") != -1 or vote.find("origins") != -1:
         return "assassins creed origins"
-    elif vote.find("playerunknown") != -1 or vote.find("pubg") != -1 or vote.find("battleground") != -1:
+    elif vote.find("unknown") != -1 or vote.find("pubg") != -1 or vote.find("battleground") != -1 :
         return "playerunknowns battlegrounds"
     elif vote.find("nier") != -1:
         return "nier automata"
@@ -535,7 +536,7 @@ def checkVote(vote):
         return "persona 5"
     elif vote.find("divinity") != -1:
         return "divinity original sin ii"
-    elif vote.find("rabbids") != -1:
+    elif vote.find("rabbids") != -1 or vote.find("rabbits") != -1:
         return "mario + rabbids kingdom battle"
     elif vote.find("mario kart") != -1:
         return "mario kart 8 deluxe"
@@ -551,7 +552,7 @@ def checkVote(vote):
         return "ys viii lacrimosa of dana"
     elif vote.find("nex machina") != -1:
         return "nex machina death machine"
-    elif vote.find("danganronpa") != -1:
+    elif vote.find("danga") != -1:
         return "danganronpa v3 killing harmony"
     elif vote.find("xenoblade") != -1:
         return "xenoblade chronicles 2"
@@ -579,7 +580,7 @@ def checkVote(vote):
         return "knack ii"    
     elif vote.find("evil within") != -1:
         return "the evil within 2"  
-    elif vote.find("15 + 25") != -1:
+    elif vote.find("15") != -1 and vote.find("25") != -1:
         return "kingdom hearts hd 15 + 25 remix"  
     elif vote.find("fire emblem echoes") != -1 or vote.find("valentia") != -1:
         return "fire emblem echoes shadows of valentia"  
@@ -607,6 +608,8 @@ def checkVote(vote):
         return "ys viii lacrimosa of dana"
     elif vote.find("final fantasy xiv") != -1 or vote.find("final fantasy 14") != -1 or vote.find("ffxiv") != -1:
         return "final fantasy xiv stormblood"
+    elif vote.find("final fantasy xii") != -1 or vote.find("final fantasy 12") != -1 or vote.find("ffxii") != -1:
+        return "final fantasy xii the zodiac age"
     elif vote.find("path of exile") != -1:
         return "path of exile the fall of oriath"
     elif vote.find("trails in the sky") != -1:
@@ -621,10 +624,107 @@ def checkVote(vote):
         return "wonder boy the dragons trap"
     elif vote.find("hearthstone") != -1:
         return "hearthstone expansions"
-    elif vote.find("28") != -1:
+    elif vote.find("28") != -1 or vote.find("ii8") != -1:
         return "kingdom hearts hd 28 final chapter"
     elif vote.find("dragon quest heroes") != -1:
         return "dragon quest heroes ii"
+    elif vote.find("sonic mania") != -1:
+        return "sonic mania"
+    elif vote.find("blazblue") != -1:
+        return "blazblue central fiction"
+    elif vote.find("atelier sophie") != -1:
+        return "atelier sophie the alchemist of the mysterious book"
+    elif vote.find("battle garegga") != -1:
+        return "battle garegga rev 2016"
+    elif vote.find("call of duty") != -1:
+        return "call of duty wwii"
+    elif vote.find("dark souls") != -1:
+        return "dark souls iii the ringed city"
+    elif vote.find("destiny") != -1:
+        return "destiny 2"
+    elif vote.find("diablo") != -1:
+        return "diablo iii rise of the necromancer"
+    elif vote.find("disgaea") != -1:
+        return "disgaea 5 complete"
+    elif vote.find("doom") != -1:
+        return "doom"
+    elif vote.find("dishonored") != -1:
+        return "dishonored death of the outsider"
+    elif vote.find("dragon quest vii") != -1 or vote.find("dragon quest 8") != -1:
+        return "dragon quest viii journey of the cursed king"
+    elif vote.find("dragon quest xi") != -1:
+        return "dragon quest xi"
+    elif vote.find("dream daddy") != -1:
+        return "dream daddy a dad dating simulator"
+    elif vote.find("elite dangerous") != -1:
+        return "elite dangerous"
+    elif vote.find("farpoint") != -1:
+        return "farpoint"
+    elif vote.find("fire pro") != -1:
+        return "fire pro wrestling world"
+    elif vote.find("getting over it") != -1:
+        return "getting over it with bennett foddy"
+    elif vote.find("golf story") != -1:
+        return "golf story"
+    elif vote.find("gran turismo") != -1:
+        return "gran turismo sport"
+    elif vote.find("gravity rush") != -1:
+        return "gravity rush 2"
+    elif vote.find("hollow knight") != -1:
+        return "hollow knight"
+    elif vote.find("hq") != -1:
+        return "hq"
+    elif vote.find("injustice 2") != -1:
+        return "injustice 2"
+    elif vote.find("jackbox") != -1 and vote.find("4") != -1:
+        return "the jackbox party pack 4"
+    elif vote.find("mass effect") != -1:
+        return "mass effect andromeda"
+    elif vote.find("metroid") != -1 or vote.find("samus") != -1:
+        return "metroid samus returns"
+    elif vote.find("nba 2k18") != -1:
+        return "nba 2k18"
+    elif vote.find("nioh") != -1:
+        return "nioh"
+    elif vote.find("overcooked") != -1:
+        return "overcooked"
+    elif vote.find("parappa") != -1:
+        return "parappa the rapper remastered"
+    elif vote.find("prey")!= -1:
+        return "prey"
+    elif vote.find("pro evo") != -1:
+        return "pro evolution soccer 2018"
+    elif vote.find("pyre") != -1:
+        return "pyre"
+    elif vote.find("rock of ages") != -1:
+        return "rock of ages 2 bigger and boulder"
+    elif vote.find("shovel knight") != -1 and vote.find("spec") != -1:
+        return "shovel knight specter of torment"
+    elif vote.find("snake") != -1:
+        return "snake pass"
+    elif vote.find("fractured but whole") != -1:
+        return "south park the fractured but whole"
+    elif vote.find("stardew valley") != -1:
+        return "stardew valley"
+    elif vote.find("superhot vr") != -1:
+        return "superhot vr"
+    elif vote.find("thimbleweed park") != -1:
+        return "thimbleweed park"
+    elif vote.find("tokyo xanadu") != -1:
+        return "tokyo xanadu ex+"
+    elif vote.find("mask of deception") != -1:
+        return "utawarerumono mask of deception"
+    elif vote.find("what remains") != -1:
+        return "what remains of edith finch"
+    elif vote.find("zero escape") != -1:
+        return "zero escape the nonary games"
+    elif vote.find("zwei") != -1:
+        return "zwei the ilvard insurrection"
+    elif vote.find("dawn of war") != -1:
+        return "warhammer 40000 dawn of war iii"
+    elif vote.find("disney") != -1:
+        return "the disney afternoon collection"
+
 
     return vote
 
@@ -786,47 +886,6 @@ for p in range(1, numPages + 1):
             if list_rank > 0:
                     voters.insert(users[i].get_text(strip=True))
                     voterCount = voterCount + 1
-        
-# end for loop
-
-# # Tally the votes
-# for i in range(1, userNum):
-#     for j in range(len(allVotes[i])):
-#         for x in range(len(finalTally)):
-#             if allVotes[i][j] in finalTally[x]:
-#                 if(j==0):
-#                     finalTally[x][1] += 4
-#                 elif(j>=1 and j<=2):
-#                     finalTally[x][1] += 3
-#                 elif(j>=3 and j<=5):
-#                     finalTally[x][1] += 2
-#                 elif(j>=6 and j<=9):
-#                     finalTally[x][1] += 1
-#                 else:
-#                     finalTally[x][1] += 0
-#                 doesExist = True #Game was found in the list already, will bypass the following
-#         if not doesExist: # Adds game to list if not found already
-#             #print(allVotes[i][j])
-#             tempVote[0] = allVotes[i][j]
-#             if(j==0):
-#                     tempVote[1] = 4
-#             elif(j>=1 and j<=2):
-#                     tempVote[1] = 3
-#             elif(j>=3 and j<=5):
-#                     tempVote[1] = 2
-#             elif(j>=6 and j<=9):
-#                     tempVote[1] = 1
-#             else:
-#                     tempVote[1] = 0
-#             finalTally[gameNum].append(tempVote[0])
-#             finalTally[gameNum].append(tempVote[1])
-#             gameNum += 1
-#         #print(allVotes[i][j])
-#         doesExist = False
-# #print(allVotes)
-
-
-# list2 = [x for x in finalTally if x != []]
 
 getGOTY()
 print("")
@@ -885,28 +944,3 @@ getFullList()
 
 def getKey(item):
     return item[1]
-
-# final = sorted(list2, key = getKey, reverse=True)
-# print(final)
-
-# for j in range(len(final)):
-#     r = str(final[j][0])
-#     results.write(r)
-#     results.write(" - ")
-#     s = str(final[j][1])
-#     results.write(s)
-#     results.write("\n")
-# results.close()
-
-# End Vote Collection
-# Begin Tallying
-
-
-#for x in range(len(final)):
-    #title = final[x][0]
-    #points = final[x][1]
-    #rank = place[points]
-    #if (place[points]<=0):
-        #rank = place[0]
-    #final[x][1] = final[x][1]/2-1
-    ##updatePoints(title, points, rank)
