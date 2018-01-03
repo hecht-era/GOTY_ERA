@@ -3,6 +3,9 @@ import urllib.request
 from bs4 import BeautifulSoup
 import sqlite3, csv, re, string
 
+def getKey(item):
+    return item[1][0][0]
+
 def getRank(num):
     return {
         0:"first",
@@ -464,6 +467,40 @@ def getBestRemakeGame():
     c.close()
     con.close()
 
+def getBestRhythmGame():
+    print("Best Rhythm Games")
+    con = sqlite3.connect("goty.db")
+    c = con.cursor()
+
+    c.execute("SELECT title, points FROM gameslist WHERE genre LIKE '%rhythm%' ORDER BY points DESC LIMIT 10;")
+    winners = c.fetchall();
+
+    count = 1;
+    for winner in winners:
+        print('%i. %s, %i points' % (count, winner[0], winner[1]));
+        count = count + 1;
+
+    con.commit()
+    c.close()
+    con.close()
+
+def getBestSimulationGame():
+    print("Best Simulators")
+    con = sqlite3.connect("goty.db")
+    c = con.cursor()
+
+    c.execute("SELECT title, points FROM gameslist WHERE genre LIKE '%simulation%' ORDER BY points DESC LIMIT 10;")
+    winners = c.fetchall();
+
+    count = 1;
+    for winner in winners:
+        print('%i. %s, %i points' % (count, winner[0], winner[1]));
+        count = count + 1;
+
+    con.commit()
+    c.close()
+    con.close()
+
 def getFanFavorite():
     print("Most Popular Games (Based on most #1 votes)\n")
     con = sqlite3.connect("goty.db")
@@ -499,17 +536,40 @@ def getBestPublisher():
     con.close()
 
 def getBestConsole():
-    print("Best Publisher\n")
+    print("Best Consoles\n")
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
-    c.execute("SELECT publisher, sum(points) FROM gameslist GROUP BY publisher ORDER BY sum(points) DESC;")
-    winners = c.fetchall();
+    c.execute("SELECT sum(points) FROM gameslist WHERE platform LIKE '%nsw%';")
+    nsw = c.fetchall();
+    c.execute("SELECT sum(points) FROM gameslist WHERE platform LIKE '%ps4%';")
+    ps4 = c.fetchall();
+    c.execute("SELECT sum(points) FROM gameslist WHERE platform LIKE '%xbo%';")
+    xbo = c.fetchall();
+    c.execute("SELECT sum(points) FROM gameslist WHERE platform LIKE '%pc%';")
+    pc = c.fetchall();
+    c.execute("SELECT sum(points) FROM gameslist WHERE platform LIKE '%wiiu%';")
+    wiiu = c.fetchall();
+    c.execute("SELECT sum(points) FROM gameslist WHERE platform LIKE '%ps3%';")
+    ps3 = c.fetchall();
+    c.execute("SELECT sum(points) FROM gameslist WHERE platform LIKE '%360%'")
+    x360 = c.fetchall();
+    c.execute("SELECT sum(points) FROM gameslist WHERE platform LIKE '%3ds%'")
+    n3ds = c.fetchall();
+    c.execute("SELECT sum(points) FROM gameslist WHERE platform LIKE '%vita%'")
+    vita = c.fetchall();
+    c.execute("SELECT sum(points) FROM gameslist WHERE platform LIKE '%ios%'")
+    ios = c.fetchall();
+    c.execute("SELECT sum(points) FROM gameslist WHERE platform LIKE '%and%'")
+    gand = c.fetchall();
 
-    count = 1;
-    for winner in winners:
-        print('%i. %s, %i votes' % (count, winner[0], winner[1]));
-        count = count + 1;
+    consoles = [("nsw", nsw), ("ps4", ps4), ("xbo", xbo), ("pc", pc), ("wiiu", wiiu), ("ps3", ps3), 
+        ("360", x360), ("3ds", n3ds), ("vita", vita), ("ios", ios), ("and", gand)]
+
+    consoles = sorted(consoles, key=getKey, reverse=True)
+
+    for console in consoles:
+        print("%s: %i points" % (console[0], console[1][0][0]))
 
     con.commit()
     c.close()
@@ -725,7 +785,6 @@ def checkVote(vote):
     elif vote.find("disney") != -1:
         return "the disney afternoon collection"
 
-
     return vote
 
 class HashTable:
@@ -739,7 +798,7 @@ class HashTable:
 
     def insert(self, value):
         if self.num >= self.size / 2:
-            rebuildTable()
+            self.rebuildTable()
 
         place = 0
         for i in range(0, len(value)):
@@ -752,6 +811,7 @@ class HashTable:
             if(place >= self.size):
                 place = 0
         self.table[place] = value
+        self.num = self.num + 1
 
     def rebuildTable(self):
         self.size = self.size * 2
@@ -759,8 +819,8 @@ class HashTable:
         for item in self.table:
             if item is not None:
                 place = 0
-                for i in range(0, len(value)):
-                    place = place + ord(value[i])
+                for i in range(0, len(item)):
+                    place = place + ord(item[i])
                 place = place % self.size
 
                 while newTable[place] is not None:
@@ -844,8 +904,10 @@ for p in range(1, numPages + 1):
             hasQuote = posts[i].find("div")
             if not hasQuote is None: # Skips quoted posts
                 hasQuote.extract()
-            posts[i].append(posts[i].get_text(strip=True))
-            lists = posts[i].find_all("li")
+            vote_list = posts[i].find_all("ol")
+            if len(vote_list) == 0:
+                continue
+            lists = vote_list[0].find_all("li")
             # Gets the list and then calculates the votes using the query
             list_rank = 0
             for list in lists:
@@ -884,8 +946,8 @@ for p in range(1, numPages + 1):
                     updatePoints(bold.contents[0], points, getRank(list_rank))
                 list_rank = list_rank + 1;
             if list_rank > 0:
-                    voters.insert(users[i].get_text(strip=True))
-                    voterCount = voterCount + 1
+                voters.insert(users[i].find("a", {"class": "username"}).get_text(strip=True))
+                voterCount = voterCount + 1
 
 getGOTY()
 print("")
@@ -931,16 +993,16 @@ getBestRacingGame()
 print("")
 getBestBoardAndCardGame()
 print("")
+getBestRhythmGame()
+print("")
+getBestSimulationGame()
+print("")
 getBestRemakeGame()
 print("")
 getFanFavorite()
 print("")
 getBestPublisher()
 print("")
+getBestConsole()
 print("Total Voters: %i" % (voterCount))
 getFullList()
-
-
-
-def getKey(item):
-    return item[1]
