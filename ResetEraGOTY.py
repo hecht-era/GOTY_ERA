@@ -580,9 +580,9 @@ def checkVote(vote):
         return "the legend of zelda breath of the wild"
     elif (vote.find("resident evil") != -1 and (vote.find("vii") != -1 or vote.find("7") != -1)) or vote.find("biohazard") != -1:
         return "resident evil vii biohazard"
-    elif vote.find("wolfenstein") != -1 or vote.find("wolfenstein") != -1 or vote.find("colossus") != -1:
+    elif vote.find("wolfenstein") != -1 or vote.find("wolfenstien") != -1 or vote.find("colossus") != -1:
         return "wolfenstein ii the new colossus"
-    elif vote.find("mario odyssey") != -1 or (vote.find("super mario") != -1 and vote.find("run") == -1):
+    elif vote.find("mario od") != -1 or (vote.find("super mario") != -1 and vote.find("run") == -1):
         return "super mario odyssey"
     elif vote.find("assassins creed") != -1 or vote.find("origins") != -1:
         return "assassins creed origins"
@@ -600,7 +600,7 @@ def checkVote(vote):
         return "mario + rabbids kingdom battle"
     elif vote.find("mario kart") != -1:
         return "mario kart 8 deluxe"
-    elif vote.find("hellblade") != -1:
+    elif vote.find("hellblade") != -1 or vote.find("senuas") != -1 or vote.find("hell") != -1:
         return "hellblade senuas sacrifice"
     elif vote.find("uncharted") != -1:
         return "uncharted the lost legacy"
@@ -608,7 +608,7 @@ def checkVote(vote):
         return "splatoon 2"
     elif vote.find("doki doki") != -1:
         return "doki doki literature club"
-    elif vote.find("ys viii") != -1:
+    elif vote.find("ys viii") != -1 or vote.find("ys 8") != -1:
         return "ys viii lacrimosa of dana"
     elif vote.find("nex machina") != -1:
         return "nex machina death machine"
@@ -774,7 +774,7 @@ def checkVote(vote):
         return "tokyo xanadu ex+"
     elif vote.find("mask of deception") != -1:
         return "utawarerumono mask of deception"
-    elif vote.find("what remains") != -1:
+    elif vote.find("what remains") != -1 or vote.find("edith finch") != -1:
         return "what remains of edith finch"
     elif vote.find("zero escape") != -1:
         return "zero escape the nonary games"
@@ -784,6 +784,38 @@ def checkVote(vote):
         return "warhammer 40000 dawn of war iii"
     elif vote.find("disney") != -1:
         return "the disney afternoon collection"
+    elif vote.find("little nightmares") != -1:
+        return "little nightmares"
+    elif vote.find("rainbow six") != -1:
+        return "tom clancys rainbow six siege year 2"
+    elif vote.find("bayonetta") != -1:
+        return "bayonetta"
+    elif vote.find("ever") != -1 and vote.find("golf") != -1:
+        return "everybodys golf"
+    elif vote.find("xrd") != -1:
+        return "guilty gear xrd rev 2"
+    elif vote.find("gundam") != -1:
+        return "gundam versus"
+    elif vote.find("hitman") != -1:
+        return "hitman patient zero"
+    elif vote.find("marvel") != -1:
+        return "marvel vs capcom infinite"
+    elif vote.find("shadow of war") != -1:
+        return "middle earth shadow of war"
+    elif vote.find("observer") != -1:
+        return "observer"
+    elif vote.find("outlast") != -1:
+        return "outlast 2"
+    elif vote.find("pinball") != -1:
+        return "pinball fx 3"
+    elif vote.find("shadow tactics") != -1:
+        return "shadow tactics blades of the shogun"
+    elif vote.find("taiko") != -1:
+        return "taiko no tatsujin session de dodon ga don"
+    elif vote.find("paperclips") != -1:
+        return "universal paperclips"
+    elif vote.find("white day") != -1:
+        return "white day a labyrinth named school"
 
     return vote
 
@@ -845,7 +877,6 @@ class HashTable:
 
         return False
 
-length = 399
 loadGamesList()
 
 # Define variables
