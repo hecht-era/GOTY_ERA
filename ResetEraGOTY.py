@@ -472,7 +472,7 @@ def getBestRhythmGame():
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
-    c.execute("SELECT title, points FROM gameslist WHERE genre LIKE '%rhythm%' ORDER BY points DESC LIMIT 10;")
+    c.execute("SELECT title, points FROM gameslist WHERE genre LIKE '%rhythm%' AND points > 0 ORDER BY points DESC LIMIT 10;")
     winners = c.fetchall();
 
     count = 1;
@@ -523,12 +523,12 @@ def getBestPublisher():
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
-    c.execute("SELECT publisher, sum(points) FROM gameslist GROUP BY publisher ORDER BY sum(points) DESC;")
+    c.execute("SELECT publisher, sum(points) FROM gameslist GROUP BY publisher ORDER BY sum(points) DESC LIMIT 20;")
     winners = c.fetchall();
 
     count = 1;
     for winner in winners:
-        print('%i. %s, %i votes' % (count, winner[0], winner[1]));
+        print('%i. %s, %i points' % (count, winner[0], winner[1]));
         count = count + 1;
 
     con.commit()
@@ -816,6 +816,8 @@ def checkVote(vote):
         return "universal paperclips"
     elif vote.find("white day") != -1:
         return "white day a labyrinth named school"
+    elif vote.find("undertale") != -1:
+        return "undertale"
 
     return vote
 
@@ -930,11 +932,17 @@ for p in range(1, numPages + 1):
     f.close()
     users = era_page.find_all("div", {"class" : "messageUserBlock"})
     posts = era_page.find_all("div", {"class" : "messageContent"})
-    for i in range(0, len(posts)):
+    startRange = 0;
+    if(p == 1):
+        startRange = 1;
+    
+    for i in range(startRange, len(posts)):
+        print("")
+        print(users[i].find("a", {"class": "username"}).get_text(strip=True))
         if not voters.find(users[i].find("a", {"class": "username"}).get_text(strip=True)):
-            hasQuote = posts[i].find("div")
-            if not hasQuote is None: # Skips quoted posts
-                hasQuote.extract()
+            hasQuote = posts[i].findAll("div", {"class": "bbCodeBlock bbCodeQuote"})
+            for quote in hasQuote: # Skips quoted posts
+                quote.extract()
             vote_list = posts[i].find_all("ol")
             if len(vote_list) == 0:
                 continue
@@ -942,6 +950,8 @@ for p in range(1, numPages + 1):
             # Gets the list and then calculates the votes using the query
             list_rank = 0
             for list in lists:
+                # if list.find('b') is None:
+                #     continue
                 while list.find('b') is not None:
                     list = list.find("b")
                 bold = list;
@@ -965,6 +975,7 @@ for p in range(1, numPages + 1):
                     bold.contents[0] = bold.contents[0].replace(",", "")
                     bold.contents[0] = bold.contents[0].replace(".", "")
                     bold.contents[0] = bold.contents[0].lower()
+                    print(bold.contents[0])
                     points = 0
                     if list_rank < 10:
                         points = points + 1
