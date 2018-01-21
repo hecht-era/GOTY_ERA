@@ -80,12 +80,12 @@ def getGOTY():
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
-    c.execute("SELECT title, points, runnerup FROM gameslist WHERE genre NOT LIKE '%remake%' ORDER BY points DESC LIMIT 20;")
+    c.execute("SELECT title, points, runnerup FROM gameslist WHERE genre NOT LIKE '%remake%' OR genre NOT LIKE '%nq%' ORDER BY points DESC, first DESC, second DESC, third DESC, fourth DESC, fifth DESC, sixth DESC, seventh DESC, eighth DESC, ninth DESC, tenth DESC, runnerup DESC LIMIT 20;")
     winners = c.fetchall();
 
     count = 1;
     for winner in winners:
-        print('%i. %s, %i points, %i honorable mentions' % (count, winner[0], winner[1], winner[2]));
+        print('%i. %s = %i points, %i honorable mentions' % (count, winner[0], winner[1], winner[2]));
         count = count + 1;
 
     con.commit()
@@ -97,7 +97,7 @@ def getFullList():
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
-    c.execute('SELECT * FROM gameslist WHERE points > 0 OR runnerup > 0 ORDER BY points DESC;')
+    c.execute("SELECT * FROM gameslist WHERE (points > 0 OR runnerup > 0) AND genre NOT LIKE '%nq%' ORDER BY points DESC, first DESC, second DESC, third DESC, fourth DESC, fifth DESC, sixth DESC, seventh DESC, eighth DESC, ninth DESC, tenth DESC, runnerup DESC;")
     winners = c.fetchall();
 
     csvWriter = csv.writer(open("results.csv", "w"))
@@ -115,12 +115,12 @@ def getBestPCGame():
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
-    c.execute("SELECT title, points FROM gameslist WHERE platform LIKE '%pc%' ORDER BY points DESC LIMIT 10;")
+    c.execute("SELECT title, points, runnerup FROM gameslist WHERE platform LIKE '%pc%' ORDER BY points DESC, first DESC, second DESC, third DESC, fourth DESC, fifth DESC, sixth DESC, seventh DESC, eighth DESC, ninth DESC, tenth DESC, runnerup DESC LIMIT 10;")
     winners = c.fetchall();
 
     count = 1;
     for winner in winners:
-        print('%i. %s, %i points' % (count, winner[0], winner[1]));
+        print('%i. %s = %i points, %i honorable mentions' % (count, winner[0], winner[1], winner[2]));
         count = count + 1;
 
     con.commit()
@@ -132,12 +132,12 @@ def getBestPS4Game():
     con = sqlite3.connect("goty.db")
     c = con.cursor()
     
-    c.execute("SELECT title, points FROM gameslist WHERE platform LIKE '%ps4%' ORDER BY points DESC LIMIT 10;")
+    c.execute("SELECT title, points, runnerup FROM gameslist WHERE platform LIKE '%ps4%' ORDER BY points DESC, first DESC, second DESC, third DESC, fourth DESC, fifth DESC, sixth DESC, seventh DESC, eighth DESC, ninth DESC, tenth DESC, runnerup DESC LIMIT 10;")
     winners = c.fetchall();
 
     count = 1;
     for winner in winners:
-        print('%i. %s, %i points' % (count, winner[0], winner[1]));
+        print('%i. %s = %i points, %i honorable mentions' % (count, winner[0], winner[1], winner[2]));
         count = count + 1;
 
     con.commit()
@@ -149,12 +149,12 @@ def getBestXBOGame():
     con = sqlite3.connect("goty.db")
     c = con.cursor()
     
-    c.execute("SELECT title, points FROM gameslist WHERE platform LIKE '%xbo%' ORDER BY points DESC LIMIT 10;")
+    c.execute("SELECT title, points, runnerup FROM gameslist WHERE platform LIKE '%xbo%' ORDER BY points DESC, first DESC, second DESC, third DESC, fourth DESC, fifth DESC, sixth DESC, seventh DESC, eighth DESC, ninth DESC, tenth DESC, runnerup DESC LIMIT 10;")
     winners = c.fetchall();
 
     count = 1;
     for winner in winners:
-        print('%i. %s, %i points' % (count, winner[0], winner[1]));
+        print('%i. %s = %i points, %i honorable mentions' % (count, winner[0], winner[1], winner[2]));
         count = count + 1;
 
     con.commit()
@@ -166,12 +166,12 @@ def getBestNSWGame():
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
-    c.execute("SELECT title, points FROM gameslist WHERE platform LIKE '%nsw%' ORDER BY points DESC LIMIT 10;")
+    c.execute("SELECT title, points, runnerup FROM gameslist WHERE platform LIKE '%nsw%' ORDER BY points DESC, first DESC, second DESC, third DESC, fourth DESC, fifth DESC, sixth DESC, seventh DESC, eighth DESC, ninth DESC, tenth DESC, runnerup DESC LIMIT 10;")
     winners = c.fetchall();
 
     count = 1;
     for winner in winners:
-        print('%i. %s, %i points' % (count, winner[0], winner[1]));
+        print('%i. %s = %i points, %i honorable mentions' % (count, winner[0], winner[1], winner[2]));
         count = count + 1;
 
     con.commit()
@@ -183,12 +183,12 @@ def getBest3DSGame():
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
-    c.execute("SELECT title, points FROM gameslist WHERE platform LIKE '%3ds%' ORDER BY points DESC LIMIT 10;")
+    c.execute("SELECT title, points, runnerup FROM gameslist WHERE platform LIKE '%3ds%' ORDER BY points DESC, first DESC, second DESC, third DESC, fourth DESC, fifth DESC, sixth DESC, seventh DESC, eighth DESC, ninth DESC, tenth DESC, runnerup DESC LIMIT 10;")
     winners = c.fetchall();
 
     count = 1;
     for winner in winners:
-        print('%i. %s, %i points' % (count, winner[0], winner[1]));
+        print('%i. %s = %i points, %i honorable mentions' % (count, winner[0], winner[1], winner[2]));
         count = count + 1;
 
     con.commit()
@@ -200,12 +200,12 @@ def getBestVITAGame():
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
-    c.execute("SELECT title, points FROM gameslist WHERE platform LIKE '%vita%' ORDER BY points DESC LIMIT 10;")
+    c.execute("SELECT title, points, runnerup FROM gameslist WHERE platform LIKE '%vita%' ORDER BY points DESC, first DESC, second DESC, third DESC, fourth DESC, fifth DESC, sixth DESC, seventh DESC, eighth DESC, ninth DESC, tenth DESC, runnerup DESC LIMIT 10;")
     winners = c.fetchall();
 
     count = 1;
     for winner in winners:
-        print('%i. %s, %i points' % (count, winner[0], winner[1]));
+        print('%i. %s = %i points, %i honorable mentions' % (count, winner[0], winner[1], winner[2]));
         count = count + 1;
 
     con.commit()
@@ -217,12 +217,12 @@ def getBestMobileGame():
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
-    c.execute("SELECT title, points FROM gameslist WHERE platform LIKE '%ios%' OR platform LIKE 'AND' ORDER BY points DESC LIMIT 10;")
+    c.execute("SELECT title, points, runnerup FROM gameslist WHERE platform LIKE '%ios%' OR platform LIKE 'AND' ORDER BY points DESC, first DESC, second DESC, third DESC, fourth DESC, fifth DESC, sixth DESC, seventh DESC, eighth DESC, ninth DESC, tenth DESC, runnerup DESC LIMIT 10;")
     winners = c.fetchall();
 
     count = 1;
     for winner in winners:
-        print('%i. %s, %i points' % (count, winner[0], winner[1]));
+        print('%i. %s = %i points, %i honorable mentions' % (count, winner[0], winner[1], winner[2]));
         count = count + 1;
 
     con.commit()
@@ -234,12 +234,12 @@ def getBestActionGame():
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
-    c.execute("SELECT title, points FROM gameslist WHERE genre LIKE '%action%' AND genre NOT LIKE '%action adventure%' ORDER BY points DESC LIMIT 10;")
+    c.execute("SELECT title, points, runnerup FROM gameslist WHERE genre LIKE '%action%' AND genre NOT LIKE '%action adventure%' ORDER BY points DESC, first DESC, second DESC, third DESC, fourth DESC, fifth DESC, sixth DESC, seventh DESC, eighth DESC, ninth DESC, tenth DESC, runnerup DESC LIMIT 10;")
     winners = c.fetchall();
 
     count = 1;
     for winner in winners:
-        print('%i. %s, %i points' % (count, winner[0], winner[1]));
+        print('%i. %s = %i points, %i honorable mentions' % (count, winner[0], winner[1], winner[2]));
         count = count + 1;
 
     con.commit()
@@ -251,12 +251,12 @@ def getBestActionAdventureGame():
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
-    c.execute("SELECT title, points FROM gameslist WHERE genre LIKE '%action adventure%' ORDER BY points DESC LIMIT 10;")
+    c.execute("SELECT title, points, runnerup FROM gameslist WHERE genre LIKE '%action adventure%' ORDER BY points DESC, first DESC, second DESC, third DESC, fourth DESC, fifth DESC, sixth DESC, seventh DESC, eighth DESC, ninth DESC, tenth DESC, runnerup DESC LIMIT 10;")
     winners = c.fetchall();
 
     count = 1;
     for winner in winners:
-        print('%i. %s, %i points' % (count, winner[0], winner[1]));
+        print('%i. %s = %i points, %i honorable mentions' % (count, winner[0], winner[1], winner[2]));
         count = count + 1;
 
     con.commit()
@@ -268,12 +268,12 @@ def getBestAdventureGame():
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
-    c.execute("SELECT title, points FROM gameslist WHERE genre LIKE '%adventure%' AND genre NOT LIKE '%action adventure%' ORDER BY points DESC LIMIT 10;")
+    c.execute("SELECT title, points, runnerup FROM gameslist WHERE genre LIKE '%adventure%' AND genre NOT LIKE '%action adventure%' ORDER BY points DESC, first DESC, second DESC, third DESC, fourth DESC, fifth DESC, sixth DESC, seventh DESC, eighth DESC, ninth DESC, tenth DESC, runnerup DESC LIMIT 10;")
     winners = c.fetchall();
 
     count = 1;
     for winner in winners:
-        print('%i. %s, %i points' % (count, winner[0], winner[1]));
+        print('%i. %s = %i points, %i honorable mentions' % (count, winner[0], winner[1], winner[2]));
         count = count + 1;
 
     con.commit()
@@ -285,12 +285,12 @@ def getBestRPGGame():
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
-    c.execute("SELECT title, points FROM gameslist WHERE genre LIKE '%rpg%' ORDER BY points DESC LIMIT 10;")
+    c.execute("SELECT title, points, runnerup FROM gameslist WHERE genre LIKE '%rpg%' ORDER BY points DESC, first DESC, second DESC, third DESC, fourth DESC, fifth DESC, sixth DESC, seventh DESC, eighth DESC, ninth DESC, tenth DESC, runnerup DESC LIMIT 10;")
     winners = c.fetchall();
 
     count = 1;
     for winner in winners:
-        print('%i. %s, %i points' % (count, winner[0], winner[1]));
+        print('%i. %s = %i points, %i honorable mentions' % (count, winner[0], winner[1], winner[2]));
         count = count + 1;
 
     con.commit()
@@ -302,12 +302,12 @@ def getBestShooterGame():
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
-    c.execute("SELECT title, points FROM gameslist WHERE genre LIKE '%shooter%' ORDER BY points DESC LIMIT 10;")
+    c.execute("SELECT title, points, runnerup FROM gameslist WHERE genre LIKE '%shooter%' ORDER BY points DESC, first DESC, second DESC, third DESC, fourth DESC, fifth DESC, sixth DESC, seventh DESC, eighth DESC, ninth DESC, tenth DESC, runnerup DESC LIMIT 10;")
     winners = c.fetchall();
 
     count = 1;
     for winner in winners:
-        print('%i. %s, %i points' % (count, winner[0], winner[1]));
+        print('%i. %s = %i points, %i honorable mentions' % (count, winner[0], winner[1], winner[2]));
         count = count + 1;
 
     con.commit()
@@ -319,12 +319,12 @@ def getBestHorrorGame():
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
-    c.execute("SELECT title, points FROM gameslist WHERE genre LIKE '%horror%' and points > 0 ORDER BY points DESC LIMIT 10;")
+    c.execute("SELECT title, points, runnerup FROM gameslist WHERE genre LIKE '%horror%' and points > 0 ORDER BY points DESC, first DESC, second DESC, third DESC, fourth DESC, fifth DESC, sixth DESC, seventh DESC, eighth DESC, ninth DESC, tenth DESC, runnerup DESC LIMIT 10;")
     winners = c.fetchall();
 
     count = 1;
     for winner in winners:
-        print('%i. %s, %i points' % (count, winner[0], winner[1]));
+        print('%i. %s = %i points, %i honorable mentions' % (count, winner[0], winner[1], winner[2]));
         count = count + 1;
 
     con.commit()
@@ -336,12 +336,12 @@ def getBestRacingGame():
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
-    c.execute("SELECT title, points FROM gameslist WHERE genre LIKE '%racing%' and points > 0 ORDER BY points DESC LIMIT 10;")
+    c.execute("SELECT title, points, runnerup FROM gameslist WHERE genre LIKE '%racing%' and points > 0 ORDER BY points DESC, first DESC, second DESC, third DESC, fourth DESC, fifth DESC, sixth DESC, seventh DESC, eighth DESC, ninth DESC, tenth DESC, runnerup DESC LIMIT 10;")
     winners = c.fetchall();
 
     count = 1;
     for winner in winners:
-        print('%i. %s, %i points' % (count, winner[0], winner[1]));
+        print('%i. %s = %i points, %i honorable mentions' % (count, winner[0], winner[1], winner[2]));
         count = count + 1;
 
     con.commit()
@@ -353,12 +353,12 @@ def getBestSportsGame():
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
-    c.execute("SELECT title, points FROM gameslist WHERE genre LIKE '%sports%' and points > 0 ORDER BY points DESC LIMIT 10;")
+    c.execute("SELECT title, points, runnerup FROM gameslist WHERE genre LIKE '%sports%' and points > 0 ORDER BY points DESC, first DESC, second DESC, third DESC, fourth DESC, fifth DESC, sixth DESC, seventh DESC, eighth DESC, ninth DESC, tenth DESC, runnerup DESC LIMIT 10;")
     winners = c.fetchall();
 
     count = 1;
     for winner in winners:
-        print('%i. %s, %i points' % (count, winner[0], winner[1]));
+        print('%i. %s = %i points, %i honorable mentions' % (count, winner[0], winner[1], winner[2]));
         count = count + 1;
 
     con.commit()
@@ -370,12 +370,12 @@ def getBestStrategyGame():
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
-    c.execute("SELECT title, points FROM gameslist WHERE genre LIKE '%strategy%' and points > 0 ORDER BY points DESC LIMIT 10;")
+    c.execute("SELECT title, points, runnerup FROM gameslist WHERE genre LIKE '%strategy%' and points > 0 ORDER BY points DESC, first DESC, second DESC, third DESC, fourth DESC, fifth DESC, sixth DESC, seventh DESC, eighth DESC, ninth DESC, tenth DESC, runnerup DESC LIMIT 10;")
     winners = c.fetchall();
 
     count = 1;
     for winner in winners:
-        print('%i. %s, %i points' % (count, winner[0], winner[1]));
+        print('%i. %s = %i points, %i honorable mentions' % (count, winner[0], winner[1], winner[2]));
         count = count + 1;
 
     con.commit()
@@ -387,12 +387,12 @@ def getBestFightingGame():
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
-    c.execute("SELECT title, points FROM gameslist WHERE genre LIKE '%fighting%' and points > 0 ORDER BY points DESC LIMIT 10;")
+    c.execute("SELECT title, points, runnerup FROM gameslist WHERE genre LIKE '%fighting%' and points > 0 ORDER BY points DESC, first DESC, second DESC, third DESC, fourth DESC, fifth DESC, sixth DESC, seventh DESC, eighth DESC, ninth DESC, tenth DESC, runnerup DESC LIMIT 10;")
     winners = c.fetchall();
 
     count = 1;
     for winner in winners:
-        print('%i. %s, %i points' % (count, winner[0], winner[1]));
+        print('%i. %s = %i points, %i honorable mentions' % (count, winner[0], winner[1], winner[2]));
         count = count + 1;
 
     con.commit()
@@ -404,12 +404,12 @@ def getBestPuzzleGame():
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
-    c.execute("SELECT title, points FROM gameslist WHERE genre LIKE '%puzzle%' and points > 0 ORDER BY points DESC LIMIT 10;")
+    c.execute("SELECT title, points, runnerup FROM gameslist WHERE genre LIKE '%puzzle%' and points > 0 ORDER BY points DESC, first DESC, second DESC, third DESC, fourth DESC, fifth DESC, sixth DESC, seventh DESC, eighth DESC, ninth DESC, tenth DESC, runnerup DESC LIMIT 10;")
     winners = c.fetchall();
 
     count = 1;
     for winner in winners:
-        print('%i. %s, %i points' % (count, winner[0], winner[1]));
+        print('%i. %s = %i points, %i honorable mentions' % (count, winner[0], winner[1], winner[2]));
         count = count + 1;
 
     con.commit()
@@ -421,12 +421,12 @@ def getBestBoardAndCardGame():
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
-    c.execute("SELECT title, points FROM gameslist WHERE genre LIKE '%board+Card%' and points > 0 ORDER BY points DESC LIMIT 10;")
+    c.execute("SELECT title, points, runnerup FROM gameslist WHERE genre LIKE '%board+Card%' and points > 0 ORDER BY points DESC, first DESC, second DESC, third DESC, fourth DESC, fifth DESC, sixth DESC, seventh DESC, eighth DESC, ninth DESC, tenth DESC, runnerup DESC LIMIT 10;")
     winners = c.fetchall();
 
     count = 1;
     for winner in winners:
-        print('%i. %s, %i points' % (count, winner[0], winner[1]));
+        print('%i. %s = %i points, %i honorable mentions' % (count, winner[0], winner[1], winner[2]));
         count = count + 1;
 
     con.commit()
@@ -438,12 +438,12 @@ def getBestVRGame():
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
-    c.execute("SELECT title, points FROM gameslist WHERE genre LIKE '%vr%' and points > 0 ORDER BY points DESC LIMIT 10;")
+    c.execute("SELECT title, points, runnerup FROM gameslist WHERE genre LIKE '%vr%' and points > 0 ORDER BY points DESC, first DESC, second DESC, third DESC, fourth DESC, fifth DESC, sixth DESC, seventh DESC, eighth DESC, ninth DESC, tenth DESC, runnerup DESC LIMIT 10;")
     winners = c.fetchall();
 
     count = 1;
     for winner in winners:
-        print('%i. %s, %i points' % (count, winner[0], winner[1]));
+        print('%i. %s = %i points, %i honorable mentions' % (count, winner[0], winner[1], winner[2]));
         count = count + 1;
 
     con.commit()
@@ -455,12 +455,12 @@ def getBestRemakeGame():
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
-    c.execute("SELECT title, points FROM gameslist WHERE genre LIKE '%remake%' ORDER BY points DESC LIMIT 10;")
+    c.execute("SELECT title, points, runnerup FROM gameslist WHERE genre LIKE '%remake%' ORDER BY points DESC, first DESC, second DESC, third DESC, fourth DESC, fifth DESC, sixth DESC, seventh DESC, eighth DESC, ninth DESC, tenth DESC, runnerup DESC LIMIT 10;")
     winners = c.fetchall();
 
     count = 1;
     for winner in winners:
-        print('%i. %s, %i points' % (count, winner[0], winner[1]));
+        print('%i. %s = %i points, %i honorable mentions' % (count, winner[0], winner[1], winner[2]));
         count = count + 1;
 
     con.commit()
@@ -472,12 +472,12 @@ def getBestRhythmGame():
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
-    c.execute("SELECT title, points FROM gameslist WHERE genre LIKE '%rhythm%' AND points > 0 ORDER BY points DESC LIMIT 10;")
+    c.execute("SELECT title, points, runnerup FROM gameslist WHERE genre LIKE '%rhythm%' AND points > 0 ORDER BY points DESC, first DESC, second DESC, third DESC, fourth DESC, fifth DESC, sixth DESC, seventh DESC, eighth DESC, ninth DESC, tenth DESC, runnerup DESC LIMIT 10;")
     winners = c.fetchall();
 
     count = 1;
     for winner in winners:
-        print('%i. %s, %i points' % (count, winner[0], winner[1]));
+        print('%i. %s = %i points, %i honorable mentions' % (count, winner[0], winner[1], winner[2]));
         count = count + 1;
 
     con.commit()
@@ -489,12 +489,12 @@ def getBestSimulationGame():
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
-    c.execute("SELECT title, points FROM gameslist WHERE genre LIKE '%simulation%' ORDER BY points DESC LIMIT 10;")
+    c.execute("SELECT title, points, runnerup FROM gameslist WHERE genre LIKE '%simulation%' ORDER BY points DESC, first DESC, second DESC, third DESC, fourth DESC, fifth DESC, sixth DESC, seventh DESC, eighth DESC, ninth DESC, tenth DESC, runnerup DESC LIMIT 10;")
     winners = c.fetchall();
 
     count = 1;
     for winner in winners:
-        print('%i. %s, %i points' % (count, winner[0], winner[1]));
+        print('%i. %s = %i points, %i honorable mentions' % (count, winner[0], winner[1], winner[2]));
         count = count + 1;
 
     con.commit()
@@ -506,7 +506,7 @@ def getFanFavorite():
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
-    c.execute("SELECT title, first FROM gameslist ORDER BY first DESC LIMIT 10;")
+    c.execute("SELECT title, first FROM gameslist ORDER BY first DESC, second DESC, third DESC, fourth DESC, fifth DESC, sixth DESC, seventh DESC, eighth DESC, ninth DESC, tenth DESC, runnerup DESC LIMIT 10;")
     winners = c.fetchall();
 
     count = 1;
@@ -578,17 +578,17 @@ def getBestConsole():
 def checkVote(vote):
     if vote.find("zelda") != -1 or vote.find("botw") != -1 or vote.find("breath of the wild") != -1:
         return "the legend of zelda breath of the wild"
-    elif (vote.find("resident evil") != -1 and (vote.find("vii") != -1 or vote.find("7") != -1)) or vote.find("biohazard") != -1:
+    elif (vote.find("resident evil") != -1 and (vote.find("vii") != -1 or vote.find("7") != -1)) or vote.find("biohazard") != -1 or vote.find("resident") != -1:
         return "resident evil vii biohazard"
     elif vote.find("wolfenstein") != -1 or vote.find("wolfenstien") != -1 or vote.find("colossus") != -1:
         return "wolfenstein ii the new colossus"
-    elif vote.find("mario od") != -1 or (vote.find("super mario") != -1 and vote.find("run") == -1):
+    elif vote.find("mario od") != -1 or (vote.find("super mario") != -1 and vote.find("run") == -1) or vote == "super" or vote == "mario switch":
         return "super mario odyssey"
     elif vote.find("assassins creed") != -1 or vote.find("origins") != -1:
         return "assassins creed origins"
     elif vote.find("unknown") != -1 or vote.find("pubg") != -1 or vote.find("battleground") != -1 :
         return "playerunknowns battlegrounds"
-    elif vote.find("nier") != -1:
+    elif vote.find("nier") != -1 or vote.find("automata") != -1:
         return "nier automata"
     elif vote.find("horizon zero") != -1 or (vote.find("horizon") != -1 and vote.find("forza") == -1):
         return "horizon zero dawn"
@@ -596,13 +596,13 @@ def checkVote(vote):
         return "persona 5"
     elif vote.find("divinity") != -1:
         return "divinity original sin ii"
-    elif vote.find("rabbids") != -1 or vote.find("rabbits") != -1:
+    elif vote.find("rabbids") != -1 or vote.find("rabbits") != -1 or vote.find("rabids") != -1 or vote.find("mario +") != -1:
         return "mario + rabbids kingdom battle"
     elif vote.find("mario kart") != -1:
         return "mario kart 8 deluxe"
     elif vote.find("hellblade") != -1 or vote.find("senuas") != -1 or vote.find("hell") != -1:
         return "hellblade senuas sacrifice"
-    elif vote.find("uncharted") != -1:
+    elif vote.find("uncharted") != -1 or vote == 'ucll':
         return "uncharted the lost legacy"
     elif vote.find("splatoon") != -1:
         return "splatoon 2"
@@ -610,7 +610,7 @@ def checkVote(vote):
         return "doki doki literature club"
     elif vote.find("ys viii") != -1 or vote.find("ys 8") != -1:
         return "ys viii lacrimosa of dana"
-    elif vote.find("nex machina") != -1:
+    elif vote.find("nex machin") != -1:
         return "nex machina death machine"
     elif vote.find("danga") != -1:
         return "danganronpa v3 killing harmony"
@@ -632,7 +632,7 @@ def checkVote(vote):
         return "crash bandicoot n sane trilogy"
     elif vote.find("skyrim") != -1 and vote.find("vr") != -1:
         return "the elder scrolls v skyrim vr"
-    elif vote.find("skyrim") != -1:
+    elif vote.find("skyrim") != -1 or vote.find("the elder scrolls v") != -1:
         return "the elder scrolls v skyrim"
     elif vote.find("steam") != -1 and vote.find("world") != -1:
         return "steamworld dig 2"    
@@ -676,7 +676,7 @@ def checkVote(vote):
         return "the legend of heroes trails in the sky the 3rd"
     elif vote.find("tales") != -1:
         return "tales of berseria"
-    elif vote.find("cup") != -1:
+    elif vote.find("cup") != -1 and vote.find("head") != -1:
         return "cuphead"
     elif vote.find("magikarp") != -1:
         return "pokemon magikarp jump"
@@ -696,7 +696,7 @@ def checkVote(vote):
         return "atelier sophie the alchemist of the mysterious book"
     elif vote.find("battle garegga") != -1:
         return "battle garegga rev 2016"
-    elif vote.find("call of duty") != -1:
+    elif vote.find("call of duty") != -1 or vote.find("cod wwii") != -1 or vote.find("cod ww2") != -1:
         return "call of duty wwii"
     elif vote.find("dark souls") != -1:
         return "dark souls iii the ringed city"
@@ -706,13 +706,13 @@ def checkVote(vote):
         return "diablo iii rise of the necromancer"
     elif vote.find("disgaea") != -1:
         return "disgaea 5 complete"
-    elif vote.find("doom") != -1:
+    elif vote.find("doom") != -1 and vote.find("vfr") == -1:
         return "doom"
     elif vote.find("dishonored") != -1:
         return "dishonored death of the outsider"
     elif vote.find("dragon quest vii") != -1 or vote.find("dragon quest 8") != -1:
         return "dragon quest viii journey of the cursed king"
-    elif vote.find("dragon quest xi") != -1:
+    elif vote.find("dragon quest xi") != -1 or vote.find("dragon quest 11") != -1:
         return "dragon quest xi"
     elif vote.find("dream daddy") != -1:
         return "dream daddy a dad dating simulator"
@@ -726,9 +726,9 @@ def checkVote(vote):
         return "getting over it with bennett foddy"
     elif vote.find("golf story") != -1:
         return "golf story"
-    elif vote.find("gran turismo") != -1:
+    elif vote.find("gran turismo") != -1 or vote.find("gt sport") != -1:
         return "gran turismo sport"
-    elif vote.find("gravity rush") != -1:
+    elif vote.find("gravity rush") != -1 or vote.find("gravity daze") != -1:
         return "gravity rush 2"
     elif vote.find("hollow knight") != -1:
         return "hollow knight"
@@ -762,11 +762,11 @@ def checkVote(vote):
         return "shovel knight specter of torment"
     elif vote.find("snake") != -1:
         return "snake pass"
-    elif vote.find("fractured but whole") != -1:
+    elif vote.find("fractured but whole") != -1 or vote == 'south park':
         return "south park the fractured but whole"
-    elif vote.find("stardew valley") != -1:
+    elif vote.find("stardew valley") != -1 or vote.find("stared valley") != -1:
         return "stardew valley"
-    elif vote.find("superhot vr") != -1:
+    elif vote.find("superhot vr") != -1 or vote.find("super hot vr") != -1:
         return "superhot vr"
     elif vote.find("thimbleweed park") != -1:
         return "thimbleweed park"
@@ -776,7 +776,7 @@ def checkVote(vote):
         return "utawarerumono mask of deception"
     elif vote.find("what remains") != -1 or vote.find("edith finch") != -1:
         return "what remains of edith finch"
-    elif vote.find("zero escape") != -1:
+    elif vote.find("zero escape") != -1 or vote.find("the nonary games") != -1:
         return "zero escape the nonary games"
     elif vote.find("zwei") != -1:
         return "zwei the ilvard insurrection"
@@ -818,6 +818,42 @@ def checkVote(vote):
         return "white day a labyrinth named school"
     elif vote.find("undertale") != -1:
         return "undertale"
+    elif vote.find("tacoma") != -1:
+        return "tacoma"
+    elif vote.find("cosmic star") != -1:
+        return "cosmic star heroine"
+    elif vote.find("ark surv") != -1:
+        return "ark survival evolved"
+    elif vote.find("pillars of the earth") != -1:
+        return "ken folletts the pillars of the earth"
+    elif vote.find("la noire") != -1:
+        return "la noire"
+    elif vote.find("mario & luigi") != -1:
+        return "mario & luigi superstar saga + bowsers minions"
+    elif vote.find("minecraft nintendo") != -1:
+        return "minecraft nintendo switch edition"
+    elif vote.find("rain w") != -1:
+        return "rain world"
+    elif vote.find("trails of cold steel") != -1:
+        return "the legend of heroes trails of cold steel"
+    elif vote.find("valkyria") != -1:
+        return "valkyria revolution"
+    elif vote.find("windjammers") != -1:
+        return "windjammers"
+    elif vote.find("wipeout") != -1:
+        return "wipeout omega collection"
+    elif vote.find("rez") != -1:
+        return "rez infinite";
+    elif vote.find("pillars of eternity") != -1:
+        return "pillars of eternity complete edition"
+    elif vote.find("night war") != -1:
+        return "battle chasers nightwar"
+    elif vote.find("gorogoa") != -1:
+        return "gorogoa"
+    elif vote.find("dragons dogma") != -1:
+        return "dragons dogma dark arisen"
+    elif vote.find("life is strange") != -1:
+        return "life is strange before the storm"
 
     return vote
 
@@ -916,11 +952,11 @@ numPages = int(nav[3])
 voterCount = 0;
 
 thread = "https://www.resetera.com/threads/resetera-games-of-the-year-2017-voting-thread-read-the-op-ends-jan-21st-8-59am-est.11841/"
-print(numPages)
+#print(numPages)
 
 for p in range(1, numPages + 1):
     thread2 = thread + "page-" + str(p)
-    print(thread2)
+    #print(thread2)
     req = urllib.request.Request(thread2, data=None, 
         headers={
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'
@@ -937,8 +973,8 @@ for p in range(1, numPages + 1):
         startRange = 1;
     
     for i in range(startRange, len(posts)):
-        print("")
-        print(users[i].find("a", {"class": "username"}).get_text(strip=True))
+        #print("")
+        #print(users[i].find("a", {"class": "username"}).get_text(strip=True))
         if not voters.find(users[i].find("a", {"class": "username"}).get_text(strip=True)):
             hasQuote = posts[i].findAll("div", {"class": "bbCodeBlock bbCodeQuote"})
             for quote in hasQuote: # Skips quoted posts
@@ -975,7 +1011,7 @@ for p in range(1, numPages + 1):
                     bold.contents[0] = bold.contents[0].replace(",", "")
                     bold.contents[0] = bold.contents[0].replace(".", "")
                     bold.contents[0] = bold.contents[0].lower()
-                    print(bold.contents[0])
+                    #print(bold.contents[0])
                     points = 0
                     if list_rank < 10:
                         points = points + 1
