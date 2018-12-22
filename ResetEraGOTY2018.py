@@ -103,8 +103,7 @@ def getFullList():
     #     print(winner)
     #     print('\n')
 
-    csvWriter = csv.writer(open("results.csv", "w"))
-    with open('results.csv','w') as f:
+    with open('results.csv','w',newline='') as f:
         writer = csv.writer(f, delimiter =',')
         writer.writerow(['Title', 'Platforms', 'Publisher', 'Genre', 'Points', 'First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh', 'Eighth', 'Ninth', 'Tenth', 'Runner-up'])
         writer.writerows(winners)
@@ -441,7 +440,7 @@ def getBestRemakeGame():
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
-    c.execute("SELECT title, points, runnerup FROM gameslist WHERE genre LIKE '%remake%' ORDER BY points DESC, first DESC, second DESC, third DESC, fourth DESC, fifth DESC, sixth DESC, seventh DESC, eighth DESC, ninth DESC, tenth DESC, runnerup DESC LIMIT 10;")
+    c.execute("SELECT title, points, runnerup FROM gameslist WHERE genre LIKE '%remake%' and points > 0 ORDER BY points DESC, first DESC, second DESC, third DESC, fourth DESC, fifth DESC, sixth DESC, seventh DESC, eighth DESC, ninth DESC, tenth DESC, runnerup DESC LIMIT 10;")
     winners = c.fetchall()
 
     count = 1
@@ -458,7 +457,7 @@ def getBestSimulationGame():
     con = sqlite3.connect("goty.db")
     c = con.cursor()
 
-    c.execute("SELECT title, points, runnerup FROM gameslist WHERE genre LIKE '%simulation%' ORDER BY points DESC, first DESC, second DESC, third DESC, fourth DESC, fifth DESC, sixth DESC, seventh DESC, eighth DESC, ninth DESC, tenth DESC, runnerup DESC LIMIT 10;")
+    c.execute("SELECT title, points, runnerup FROM gameslist WHERE genre LIKE '%simulation%' and points > 0 ORDER BY points DESC, first DESC, second DESC, third DESC, fourth DESC, fifth DESC, sixth DESC, seventh DESC, eighth DESC, ninth DESC, tenth DESC, runnerup DESC LIMIT 10;")
     winners = c.fetchall()
 
     count = 1
@@ -551,15 +550,15 @@ def checkVote(vote):
         return "dragon quest xi echoes of an elusive age"
     elif vote.find("yakuza 6") != -1:
         return "yakuza 6 the song of life"
-    elif vote.find("red dead redemption") != -1:
+    elif vote.find("red dead redemption") != -1 or vote.find("red red redemption") != -1 or vote.find("read dead redemption") != -1 or vote == "red" or vote == "red redemption 2":
         return "red dead redemption 2"
-    elif vote.find("super smash") != -1:
+    elif vote.find("super smash") != -1 or vote.find("smash bros") != -1 or vote == "smash ultimate" or vote == "super smah bros ultimate":
         return "super smash bros ultimate"
     elif vote.find("fortnite") != -1:
         return "fortnite battle royale"
-    elif vote.find("god of war") != -1:
+    elif vote.find("god of") != -1:
         return "god of war"
-    elif vote.find("astro bot") != -1 or vote.find("astrobot") != -1:
+    elif vote.find("astro bot") != -1 or vote.find("astrobot") != -1 or vote == "astro":
         return "astro bot rescue mission"
     elif vote.find("xenoblade") != -1:
         return "xenoblade chronicles 2 torna the golden country"
@@ -567,12 +566,106 @@ def checkVote(vote):
         return "just shapes and beats"
     elif vote.find("ni no kuni") != -1:
         return "ni no kuni ii revenant kingdom"
-    elif vote.find("obra dinn") != -1:
+    elif vote.find("obra dinn") != -1 or vote.find("orbra dinn") != -1:
         return "return of the obra dinn"
     elif vote.find("octopath") != -1:
-        return "octopath traveller"
-    elif vote.find("call of duty") != -1:
+        return "octopath traveler"
+    elif vote.find("call of duty") != -1 or vote.find("black ops 4") != -1:
         return "call of duty black ops iiii"
+    elif vote.find("mega man 11") != -1 or vote.find("mega man xi") != -1 or vote.find("megaman xi") != -1:
+        return "megaman 11"
+    elif vote.find("pokemon lets go") != -1 or vote.find("pokémon lets go") != -1 or vote.find("pókemon lets go") != -1:
+        return "pokemon lets go pikachu and eevee"
+    elif vote.find("farcry") != -1:
+        return "far cry 5"
+    elif vote.find("pillars of eternity 2") != -1:
+        return "pillars of eternity ii deadfire"
+    elif vote.find("persona 3") != -1:
+        return "persona 3 dancing moon night"
+    elif vote.find("persona 4") != -1:
+        return "persona 4 dancing all night"
+    elif vote.find("persona 5") != -1:
+        return "persona 5 dancing in starlight"
+    elif vote.find("monster boy") != -1:
+        return "monster boy and the cursed kingdom"
+    elif vote.find("mutant year zero") != -1:
+        return "mutant year zero road to eden"
+    elif vote.find("detroit") != -1:
+        return "detroit become human"
+    elif vote.find("battlefield") != -1:
+        return "battlefield v"
+    elif vote.find("soul calibur") != -1  or vote.find("soulcalibur") != -1:
+        return "soulcalibur vi"
+    elif vote.find("forza") != -1:
+        return "forza horizon 4"
+    elif vote.find("thronebreaker") != -1:
+        return "thronebreaker the witcher tales"
+    elif vote.find("tropical freeze") != -1:
+        return "donkey kong country tropical freeze"
+    elif vote.find("kiwami") != -1:
+        return "yakuza kiwami 2"
+    elif vote.find("divinity original sin") != -1:
+        return "divinity original sin ii definitive edition"
+    elif vote.find("delta rune") != -1:
+        return "deltarune chapter 1"
+    elif vote.find("the breach") != -1:
+        return "into the breach"
+    elif vote.find("valkyria chronicles 4") != -1 or vote.find("valkyria 4") != -1 or vote.find("valkyria chrinicles 4") != -1 or vote.find("chronicles 4") != -1 or vote == "valkyria chronicals 4":
+        return "valkyria chronicles 4"
+    elif vote.find("assassins creed") != -1 or vote.find("assassin´s creed") != -1:
+        return "assassins creed odyssey"
+    elif vote.find("hollow knight") != -1:
+        return "hollow knight"
+    elif vote.find("banner saga 3") != -1:
+        return "the banner saga 3"
+    elif vote.find("yakuza 0") != -1:
+        return "yakuza 0"
+    elif vote.find("shadow of the") != -1:
+        return "shadow of the colossus"
+    elif vote.find("zone of the enders") != -1:
+        return "zone of the enders vr"
+    elif vote.find("hellblade") != -1:
+        return "hellblade senuas sacrifice"
+    elif vote.find("life is strange 2") != -1:
+        return "life is strange 2 episode 1"
+    elif vote.find("before the storm") != -1:
+        return "life is strange before the storm farewell"
+    elif vote.find("rush vr") != -1:
+        return "rush"
+    elif vote.find("no mans sky") != -1:
+        return "no mans sky"
+    elif vote.find("diablo iii") != -1 or vote.find("diablo 3") != -1:
+        return "diablo iii the eternal collection"
+    elif vote.find("captain spirit") != -1:
+        return "the awesome adventures of captain spirit"
+    elif vote == "mhw":
+        return "monster hunter world"
+    elif vote.find("ys viii") != -1:
+        return "ys viii lacrimosa of dana"
+    elif vote.find("moss") != -1:
+        return "moss"
+    elif vote.find("ead cells") != -1:
+        return "dead cells"
+    elif vote.find("bayonetta 1") != -1:
+        return "bayonetta"
+    elif vote.find("the world ends with you") != -1:
+        return "the world ends with you final remix"
+    elif vote.find("street fighter 5") != -1:
+        return "street fighter v arcade edition"
+    elif vote.find("total war warhammer") != -1:
+        return "total war warhammer ii rise of the tomb kings"
+    elif vote.find("donkey kong country") != -1:
+        return "donkey kong country tropical freeze"
+    elif vote.find("dark souls") != -1:
+        return "dark souls remastered"
+    elif vote.find("strange journey redux") != -1:
+        return "shin megami tensei strange journey redux"
+    elif vote.find("unravel") != -1:
+        return "unravel two"
+    elif vote.find("gwent") != -1:
+        return "gwent the witcher card game"
+    elif vote.find("the missing") != -1:
+        return "the missing jj macfield and the island of memories"
     return vote
 
 class HashTable:
