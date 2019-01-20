@@ -544,21 +544,23 @@ def getBestConsole():
 def checkVote(vote):
     if vote.find("marvel") != -1 or vote.find("spiderman") != -1 or vote.find("spider man") != -1:
         return "marvels spiderman"
+    if vote.find("tomb raider") != -1:
+        return "shadow of the tomb raider"
     elif vote.find("dragon ball") != -1 or vote.find("dragonball") != -1:
         return "dragonball fighterz"
-    elif vote.find("dragon quest xi") != -1 or vote.find("dragon quest 11") != -1:
+    elif vote.find("dragon quest xi") != -1 or vote.find("dragon quest 11") != -1 or vote.find("echoes of an elusive age") != -1:
         return "dragon quest xi echoes of an elusive age"
     elif vote.find("yakuza 6") != -1:
         return "yakuza 6 the song of life"
-    elif vote.find("red dead redemption") != -1 or vote.find("red red redemption") != -1 or vote.find("read dead redemption") != -1 or vote == "red" or vote == "red redemption 2":
+    elif vote.find("red dead redemption") != -1 or vote.find("red red redemption") != -1 or vote.find("read dead redemption") != -1 or vote == "red" or vote == "red redemption 2" or vote == "red dead redeption 2":
         return "red dead redemption 2"
-    elif vote.find("super smash") != -1 or vote.find("smash bros") != -1 or vote == "smash ultimate" or vote == "super smah bros ultimate":
+    elif vote.find("super smash") != -1 or vote.find("smash bros") != -1 or vote == "smash ultimate" or vote == "super smah bros ultimate" or vote == "super smas bros ultimate":
         return "super smash bros ultimate"
     elif vote.find("fortnite") != -1:
         return "fortnite battle royale"
-    elif vote.find("god of") != -1:
+    elif vote.find("god of") != -1 or vote == "of war":
         return "god of war"
-    elif vote.find("astro bot") != -1 or vote.find("astrobot") != -1 or vote == "astro":
+    elif vote.find("astro bot") != -1 or vote.find("astrobot") != -1 or vote == "astro" or vote == "tro bot":
         return "astro bot rescue mission"
     elif vote.find("xenoblade") != -1:
         return "xenoblade chronicles 2 torna the golden country"
@@ -576,9 +578,9 @@ def checkVote(vote):
         return "megaman 11"
     elif vote.find("pokemon lets go") != -1 or vote.find("pokémon lets go") != -1 or vote.find("pókemon lets go") != -1:
         return "pokemon lets go pikachu and eevee"
-    elif vote.find("farcry") != -1:
+    elif vote.find("farcry") != -1 or vote == "fary cry 5" or vote == "far":
         return "far cry 5"
-    elif vote.find("pillars of eternity 2") != -1:
+    elif vote.find("pillars of eternity") != -1:
         return "pillars of eternity ii deadfire"
     elif vote.find("persona 3") != -1:
         return "persona 3 dancing moon night"
@@ -590,7 +592,7 @@ def checkVote(vote):
         return "monster boy and the cursed kingdom"
     elif vote.find("mutant year zero") != -1:
         return "mutant year zero road to eden"
-    elif vote.find("detroit") != -1:
+    elif vote.find("detroit") != -1 or vote.find("become human") != -1:
         return "detroit become human"
     elif vote.find("battlefield") != -1:
         return "battlefield v"
@@ -602,7 +604,7 @@ def checkVote(vote):
         return "thronebreaker the witcher tales"
     elif vote.find("tropical freeze") != -1:
         return "donkey kong country tropical freeze"
-    elif vote.find("kiwami") != -1:
+    elif vote.find("kiwami") != -1 or vote == "yakuza 2":
         return "yakuza kiwami 2"
     elif vote.find("divinity original sin") != -1:
         return "divinity original sin ii definitive edition"
@@ -612,15 +614,15 @@ def checkVote(vote):
         return "into the breach"
     elif vote.find("valkyria chronicles 4") != -1 or vote.find("valkyria 4") != -1 or vote.find("valkyria chrinicles 4") != -1 or vote.find("chronicles 4") != -1 or vote == "valkyria chronicals 4":
         return "valkyria chronicles 4"
-    elif vote.find("assassins creed") != -1 or vote.find("assassin´s creed") != -1:
+    elif vote.find("assassins creed") != -1 or vote.find("assassin´s creed") != -1 or vote.find("creed odyssey") != -1:
         return "assassins creed odyssey"
-    elif vote.find("hollow knight") != -1:
+    elif vote.find("hollow knight") != -1 or vote == "hollow night":
         return "hollow knight"
-    elif vote.find("banner saga 3") != -1:
+    elif vote.find("banner saga") != -1:
         return "the banner saga 3"
     elif vote.find("yakuza 0") != -1:
         return "yakuza 0"
-    elif vote.find("shadow of the") != -1:
+    elif vote.find("shadow of the") != -1 or vote.find("shadow of colossus") != -1:
         return "shadow of the colossus"
     elif vote.find("zone of the enders") != -1:
         return "zone of the enders vr"
@@ -634,19 +636,19 @@ def checkVote(vote):
         return "rush"
     elif vote.find("no mans sky") != -1:
         return "no mans sky"
-    elif vote.find("diablo iii") != -1 or vote.find("diablo 3") != -1:
+    elif vote.find("diablo") != -1:
         return "diablo iii the eternal collection"
     elif vote.find("captain spirit") != -1:
         return "the awesome adventures of captain spirit"
-    elif vote == "mhw":
+    elif vote == "mhw" or vote == "onster hunter world":
         return "monster hunter world"
     elif vote.find("ys viii") != -1:
         return "ys viii lacrimosa of dana"
     elif vote.find("moss") != -1:
         return "moss"
-    elif vote.find("ead cells") != -1:
+    elif vote.find("ead cells") != -1 or vote == "dead":
         return "dead cells"
-    elif vote.find("bayonetta 1") != -1:
+    elif vote.find("bayonetta 1") != -1 or vote == "bayonetta":
         return "bayonetta"
     elif vote.find("the world ends with you") != -1:
         return "the world ends with you final remix"
@@ -666,6 +668,116 @@ def checkVote(vote):
         return "gwent the witcher card game"
     elif vote.find("the missing") != -1:
         return "the missing jj macfield and the island of memories"
+    elif vote.find("mario + rabbids") != -1:
+        return "mario + rabbids kingdom battle donkey kong adventure"
+    elif vote.find("darksiders") != -1:
+        return "darksiders iii"
+    elif vote.find("starlink") != -1 or vote.find("star link") != -1:
+        return "starlink battle for atlas"
+    elif vote.find("kingdom come") != -1:
+        return "kingdom come deliverance"
+    elif vote.find("gris") != -1:
+        return "gris"
+    elif vote.find("deltarune") != -1:
+        return "deltarune chapter 1"
+    elif vote.find("atelier lydie & suelle") != -1 or vote.find("atelier lydie and suelle") != -1:
+        return "atelier lydie & suelle the alchemists and the mysterious paintings"
+    elif vote.find("atelier rorona") != -1:
+        return "atelier rorona the alchemist of arland dx"
+    elif vote.find("atelier totori") != -1:
+        return "atelier totori the alchemist of arland dx"
+    elif vote.find("celeste") != -1:
+        return "celeste"
+    elif vote.find("wipeout") != -1:
+        return "wipeout omega collection"
+    elif vote == "into the beach":
+        return "into the breach"
+    elif vote == "guacamalee 2":
+        return "guacamelee 2"
+    elif vote.find("destiny 2") != -1:
+        return "destiny 2 forsaken"
+    elif vote.find("beat saber") != -1:
+        return "beat saber"
+    elif vote.find("vermintide") != -1:
+        return "warhammer vermintide 2"
+    elif vote.find("labyrinth of refrain") != -1:
+        return "labyrinth of refrain coven of dusk"
+    elif vote.find("the red strings club") != -1:
+        return "the red strings club"
+    elif vote.find("nintendo labo") != -1 or vote == "labo":
+        return "nintendo labo"
+    elif vote.find("shibuya scramble") != -1:
+        return "428 shibuya scramble"
+    elif vote.find("dragon quest builders") != -1:
+        return "dragon quest builders"
+    elif vote.find("yokus") != -1 or vote.find("island express") != -1:
+        return "yokus island express"
+    elif vote.find("trails of cold steel") != -1:
+        return "the legend of heroes trails of cold steel ii"
+    elif vote.find("civilization vi rise and fall") != -1:
+        return "sid meiers civilization vi rise and fall"
+    elif vote.find("tetris effect") != -1 or vote == "tetris" or vote == "tetris effec":
+        return "tetris effect"
+    elif vote.find("iconoclast") != -1:
+        return "iconoclasts"
+    elif vote.find("pubg") != -1 or vote == "player unknowns battlegrounds":
+        return "playerunknowns battlegrounds"
+    elif vote.find("deracine") != -1:
+        return "déraciné"
+    elif vote.find("donut country") != -1:
+        return "donut county"
+    elif vote.find("nier automata become as gods edition") != -1:
+        return "nier automata"
+    elif vote.find("street fighter v") != -1:
+        return "street fighter v arcade edition"
+    elif vote.find("sushi striker") != -1:
+        return "sushi striker the way of sushido"
+    elif vote.find("splatoon") != -1:
+        return "splatoon 2 octo expansion"
+    elif vote.find("the last remnant") != -1:
+        return "the last remnant remastered"
+    elif vote.find("resonance of fate") != -1:
+        return "resonance of fate remastered"
+    elif vote.find("cthulhu") != -1 or vote.find("cthuhlu") != -1:
+        return "call of cthulhu the official videogame"
+    elif vote.find("cross code") != -1:
+        return "crosscode"
+    elif vote.find("spyro") != -1:
+        return "spyro reignited trilogy"
+    elif vote.find("final fantasy xv") != -1:
+        return "final fantasy xv windows edition"
+    elif vote.find("reigns") != -1:
+        return "reigns game of thrones"
+    elif vote.find("blazeblue") != -1:
+        return "blazblue cross tag battle"
+    elif vote.find("over cooked 2") != -1:
+        return "overcooked 2"
+    elif vote.find("dissidia") != -1:
+        return "dissidia final fantasy nt"
+    elif vote.find("wario") != -1:
+        return "warioware gold"
+    elif vote.find("shenmue") != -1:
+        return "shenmue i & ii"
+    elif vote.find("sonic mania") != -1:
+        return "sonic mania plus"
+    elif vote == "forgotton anne":
+        return "forgotten anne"
+    elif vote.find("final fantasy xii") != -1:
+        return "final fantasy xii the zodiac age"
+    elif vote.find("shapeshifting") != -1:
+        return "the shapeshifting detective"
+    elif vote.find("mario tennis") != -1:
+        return "mario tennis aces"
+    elif vote == "electronaughts":
+        return "electronauts"
+    elif vote.find("jackbox") != -1:
+        return "the jackbox party pack 5"
+    elif vote.find("captain toad") != -1:
+        return "captain toad treasure tracker"
+    elif vote.find("hitman 2") != -1:
+        return "hitman 2"
+    elif vote.find("vampyr") != -1:
+        return "vampyr"
     return vote
 
 class HashTable:
@@ -788,10 +900,12 @@ for p in range(1, numPages + 1):
     for i in range(startRange, len(posts)):
         # print("")
         # print(users[i])
+        user = users[i]
+        post = posts[i]
         if not voters.find(users[i]):
-            # hasQuote = posts[i].findAll("div", {"class" "bbCodeBlock bbCodeBlock--expandable bbCodeBlock--quote"})
-            # for quote in hasQuote # Skips quoted posts
-            #     quote.extract()
+            hasQuote = posts[i].find_all("div", {"class": " bbCodeBlock bbCodeBlock--expandable bbCodeBlock--quote"})
+            for quote in hasQuote: # Skips quoted posts
+                quote.extract()
             vote_list = posts[i].find("ol")
             if vote_list is None or len(vote_list) == 0:
                 continue
@@ -823,8 +937,9 @@ for p in range(1, numPages + 1):
                     bold.contents[0] = bold.contents[0].replace("!", "")
                     bold.contents[0] = bold.contents[0].replace(",", "")
                     bold.contents[0] = bold.contents[0].replace(".", "")
+                    bold.contents[0] = bold.contents[0].replace("‘", "")
                     bold.contents[0] = bold.contents[0].lower()
-                    #print(bold.contents[0])
+                    # print(bold.contents[0])
                     points = 0
                     if list_rank < 10:
                         points = points + 1
